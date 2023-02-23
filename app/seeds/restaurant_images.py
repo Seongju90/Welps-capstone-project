@@ -103,13 +103,83 @@ restaurant_images = [
         'preview': False
     },
     {
-        'restaurant_id': ,
-        'url': '',
+        'restaurant_id': 5,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/BR8Wkm_XTB9iVnbq92sdhA/348s.jpg',
         'preview': False
     },
     {
-        'restaurant_id': ,
-        'url': '',
+        'restaurant_id': 5,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/oHyzfNwEQ20UljExmQrbww/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 5,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/dUhQd2W2wLp-PQOvAvilDQ/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 5,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/5w50SqIfArLefcZaCnB9Cg/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 6,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/fSFlsSYVmjJsIryM-D3jdA/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 6,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/PmfT0CR9XhVPOb69CKojig/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 6,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/RZ23FxmXuRH3s4BaUXqLEw/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 6,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/F97kUE5HQN_mqv3Tvk_m9Q/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 7,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/1AussqtbyeeSYSFzYLwMsA/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 7,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/PB0IYRIgCtjR4_08nrYxyA/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 7,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/pS44AuffGJ12fNB0PQHtTg/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 7,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/XPzpeRmpACO3mgeO1GBZoA/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 8,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/r2GXyUlICiNrfkINd3creA/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 8,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/M4WyXT3ytSvDN9rT2k8cbw/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 8,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/hCcpJR8VfxsdLKbISu9eVQ/348s.jpg',
+        'preview': False
+    },
+    {
+        'restaurant_id': 8,
+        'url': 'https://s3-media0.fl.yelpcdn.com/bphoto/-SxaJ38SVYxPW5eR_iZxHA/348s.jpg',
         'preview': False
     },
 ]
