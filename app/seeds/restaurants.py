@@ -287,6 +287,7 @@ restaurants = [
     },
 ]
 
+
 def seed_restaurants():
     # loop through the list of restaurants
     for restaurant in restaurants:
