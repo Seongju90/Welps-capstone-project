@@ -9,7 +9,7 @@ class Restaurant(db.Model):
 # In order to compartmentalize the db on Render we have to associate each db with a specific schema that we setup in the .env file
 # Multiple projects use the same database, and this line of code is saying which schema to use.
     if environment == "production":
-        __tableargs__ = {'schema': SCHEMA}
+        __table_args__  = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
