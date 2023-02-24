@@ -6,7 +6,7 @@ class Category(db.Model):
 
 
     if environment == "production":
-        __tableargs__ = {'schema': SCHEMA}
+        __table_args__  = {'schema': SCHEMA}
 
 
     id = db.Column(db.Integer, primary_key=True)
