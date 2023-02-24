@@ -36,6 +36,7 @@ class Restaurant(db.Model):
         back_populates="favorite"
     )
 
+    # this property will return a list
     types = db.relationship(
         'Category',
         secondary=restaurant_categories,

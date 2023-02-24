@@ -3,7 +3,6 @@ from app.models import db, restaurant_categories, Category, Restaurant, environm
 
 def seed_restaurant_categories():
 
-
     kunjip = Restaurant.query.get(1)
     chungdam = Restaurant.query.get(2)
     daeho = Restaurant.query.get(3)
@@ -32,6 +31,7 @@ def seed_restaurant_categories():
     fastfood = Category.query.get(5)
     drinks = Category.query.get(6)
 
+    # able to use appened, or any list method because property types is a list
     kunjip.types.append(korean)
     chungdam.types.append(korean)
     daeho.types.append(korean)
