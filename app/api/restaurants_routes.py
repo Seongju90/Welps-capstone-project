@@ -6,6 +6,10 @@ from app.models import Restaurant, Review, RestaurantImage, Category, restaurant
 restaurant_routes = Blueprint('restaurants', __name__)
 
 
+# In Python, you can use dot notation to access attributes of an object or properties of a class,
+# but you need to use bracket notation to access elements in a dictionary or a list.
+
+
 # GET for all restaurants
 @restaurant_routes.route('/')
 def all_restaurants():
@@ -15,6 +19,7 @@ def all_restaurants():
 
     # Loop through each restaurant, then find each restaurants reviews, images, categories
     for restaurant in restaurant_dict:
+
         reviews = Review.query.filter(Review.restaurant_id == restaurant['id']).all()
         images = RestaurantImage.query.filter(RestaurantImage.restaurant_id == restaurant['id']).all()
         # Category.restaurant =>  restaurant refers to variable defined in relationship on Category table
@@ -34,4 +39,5 @@ def all_restaurants():
         restaurant['categories'] = categories_dict
 
 
+    # Use jsonify to return Content-Type header as application/json, other it will default to text/html
     return  jsonify({"Restaurants": restaurant_dict})
