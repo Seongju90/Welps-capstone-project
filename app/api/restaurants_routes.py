@@ -1,6 +1,9 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import Restaurant, Review, RestaurantImage, Category, restaurant_categories
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
+from app.models import Restaurant, Review, RestaurantImage, Category, db
+from app.forms import RestaurantForm
+from .auth_routes import validation_errors_to_error_messages
+
 
 
 restaurant_routes = Blueprint('restaurants', __name__)
@@ -41,3 +44,34 @@ def all_restaurants():
 
     # Use jsonify to return Content-Type header as application/json, other it will default to text/html
     return  jsonify({"Restaurants": restaurant_dict})
+
+# CREATE a restaurant
+@restaurant_routes.route('/', methods = ['POST'])
+@login_required
+def create_restaurant():
+    form = RestaurantForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+
+        newRestaurant = Restaurant(
+            name=form.data["name"],
+            owner_id=current_user.id,
+            address=form.data["address"],
+            city=form.data["city"],
+            state=form.data["state"],
+            country=form.data["country"],
+            zipcode=form.data["zipcode"],
+            price=form.data["price"],
+            phone_number=form.data["phone_number"],
+            preview_image=form.data["preview_image"],
+            start_hours=form.data["start_hours"],
+            end_hours=form.data["end_hours"]
+        )
+
+        db.session.add(newRestaurant)
+        db.session.commit()
+
+        return newRestaurant.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

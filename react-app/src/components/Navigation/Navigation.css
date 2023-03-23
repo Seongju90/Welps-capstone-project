@@ -1,7 +1,17 @@
 .profile-dropdown {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 1vw;
 }
 
 .hidden {
   display: none;
+}
+
+.nav-bar-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
 }
