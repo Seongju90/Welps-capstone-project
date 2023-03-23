@@ -1,0 +1,23 @@
+.restaurant-card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.restaurant-card-img {
+    width: 200px;
+    height: 200px;
+}
+
+.restaurant-info-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1vw;
+}
+
+.category-list {
+    display: flex;
+}
+
+.restaurant-price{
+    margin-left: 1vw;
+}
