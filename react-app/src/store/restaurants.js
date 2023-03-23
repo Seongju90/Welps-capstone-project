@@ -3,10 +3,10 @@
 
 
 /*---------------------- ACTION CREATORS ----------------------*/
-const allRestaurants = (restaurants) => {
+const actionLoadAllRestaurants = (payload) => {
     return {
         type: ALL_RESTAURANTS,
-        restaurants
+        payload
     }
 }
 
@@ -19,7 +19,7 @@ export const thunkAllRestaurants = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(allRestaurants(data));
+        dispatch(actionLoadAllRestaurants(data));
         return response
     }
     else if (response.status < 500) {
@@ -34,6 +34,15 @@ export const thunkAllRestaurants = () => async (dispatch) => {
 const initialState = {}
 const restaurantsReducer = (state = initialState, action) => {
     let newState = {...state}
+    switch (action.type) {
+        case ALL_RESTAURANTS:
+            // console.log('action', action)
+            // console.log('reducer', action.payload.Restaurants)
+            newState = normalizeArray(action.payload.Restaurants)
+            return newState
+        default:
+            return state;
+    }
 }
 
 export default restaurantsReducer
