@@ -14,15 +14,15 @@ export default function RestaurantCard ({restaurant}) {
             </div>
             <div className="restaurant-info-container">
                 <div className="restaurant-name">{id}. {name}</div>
-                <div className="restaurant-total-reviews">{reviews.length}</div>
+                <div className="restaurant-total-reviews">{reviews?.length}</div>
                 <div className="category-list">
-                    {categories.map(cat => (
-                        <div className="restaurant-category" key={cat.id}>{cat.type}</div>
-                    ))}
+                    {categories?.length ? categories.map(cat => (
+                        <div className="restaurant-category" key={cat?.id}>{cat?.type}</div>
+                    )) : 'None'}
                     <span className="restaurant-price">{price}</span>
                 </div>
                 {/* <div className="restaurant-price">{price}</div> */}
-                <div className="restaurant-review">{reviews.length ? reviews[0]?.review : "No Reviews Yet" } </div>
+                <div className="restaurant-review">{reviews?.length ? reviews[0]?.review : "No Reviews Yet" } </div>
             </div>
         </div>
     )
