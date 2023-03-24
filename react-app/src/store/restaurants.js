@@ -1,6 +1,6 @@
 /*---------------------- TYPE VARIABLES ----------------------*/
- const  ALL_RESTAURANTS = "restaurants/ALL_RESTAURANTS"
-
+const ALL_RESTAURANTS = "restaurants/ALL_RESTAURANTS"
+const CREATE_RESTAURANT = "restaurants/CREATE_RESTAURANT"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -10,10 +10,16 @@ const actionLoadAllRestaurants = (payload) => {
     }
 }
 
+const actionCreateRestaurant = (payload) => {
+    return {
+        type: CREATE_RESTAURANT,
+        payload
+    }
+}
 
 /*---------------------- THUNK ACTION CREATORS ----------------------*/
 export const thunkAllRestaurants = () => async (dispatch) => {
-    const response = await fetch(`/api/restaurants/`, {
+    const response = await fetch(`/api/restaurants`, {
         headers: { "Content-Type": "application/json"},
     })
 
@@ -29,6 +35,25 @@ export const thunkAllRestaurants = () => async (dispatch) => {
     else return { errors: ["An error occurred. Please try again."] }
 }
 
+export const thunkCreateRestaurant = (form) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(form)
+    })
+
+    if(response.ok) {
+        const data = await response.json();
+        dispatch(actionCreateRestaurant(data))
+        return null
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+    else return { errors: ["An error occurred. Please try again."] }
+}
 
 /*---------------------- RESTAURANTS REDUCER ----------------------*/
 const initialState = {}
@@ -36,9 +61,11 @@ const restaurantsReducer = (state = initialState, action) => {
     let newState = {...state}
     switch (action.type) {
         case ALL_RESTAURANTS:
-            // console.log('action', action)
-            // console.log('reducer', action.payload.Restaurants)
             newState = normalizeArray(action.payload.Restaurants)
+            return newState
+        case CREATE_RESTAURANT:
+            // console.log('reducer action', action.payload)
+            newState[action.payload.id] = action.payload
             return newState
         default:
             return state;

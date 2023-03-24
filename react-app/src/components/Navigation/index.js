@@ -16,12 +16,12 @@ function Navigation({ isLoaded }){
 			<div className="home-button-container">
 				<NavLink exact to="/">Home</NavLink>
 			</div>
-			<OpenModalButton
-				buttonText="List a Restaurant"
-				modalComponent={RestaurantFormModal}
-			/>
 			{isLoaded && (
 				<div className="profile-button-container">
+					<OpenModalButton
+						buttonText="List a Restaurant"
+						modalComponent={<RestaurantFormModal/>}
+					/>
 					<ProfileButton user={sessionUser} />
 				</div>
 			)}

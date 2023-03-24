@@ -41,7 +41,7 @@ class RestaurantForm(FlaskForm):
         "Country",
         validators = [
             DataRequired("Country is required"),
-            Length(min=5, max=255, message='Country must be 5 to 255 characters')
+            Length(min=1, max=255, message='Country must be 1 to 255 characters')
         ])
     zipcode = IntegerField(
         "Zipcode",

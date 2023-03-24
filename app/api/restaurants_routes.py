@@ -14,7 +14,7 @@ restaurant_routes = Blueprint('restaurants', __name__)
 
 
 # GET for all restaurants
-@restaurant_routes.route('/')
+@restaurant_routes.route('')
 def all_restaurants():
     # Query for all restaurants, then change <Python> into readable dictionary
     all_restaurants = Restaurant.query.all()
@@ -46,7 +46,7 @@ def all_restaurants():
     return  jsonify({"Restaurants": restaurant_dict})
 
 # CREATE a restaurant
-@restaurant_routes.route('/', methods = ['POST'])
+@restaurant_routes.route('', methods=['POST'])
 @login_required
 def create_restaurant():
     form = RestaurantForm()

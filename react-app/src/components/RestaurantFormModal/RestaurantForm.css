@@ -1,0 +1,9 @@
+.create-restaurant-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-form-main-container {
+    display: flex;
+    flex-direction: row;
+}
