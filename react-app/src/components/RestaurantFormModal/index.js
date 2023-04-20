@@ -43,6 +43,7 @@ export default function RestaurantFormModal() {
         }))
 
         if(data) {
+            console.log(data)
             setErrors(data.errors)
         } else {
             // if data is created properly, it returns null which close Modal.
@@ -55,11 +56,6 @@ export default function RestaurantFormModal() {
         <div className="create-form-main-container">
             <form className="create-restaurant-container" onSubmit={handleSubmit}>
                 <h2>List a Restaurant</h2>
-                <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
                 <label>
                         <input
                             type="text"
@@ -109,12 +105,15 @@ export default function RestaurantFormModal() {
                         />
                 </label>
                 <label>
-                        <input
-                            type="text"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
-                            placeholder="Price"
-                        />
+                    <select
+                        onChange={(e) => setPrice(e.target.value)}
+                    >
+                        <option value="">--Please choose an option--</option>
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
+                        <option value="$$$$">$$$$</option>
+                    </select>
                 </label>
                 <label>
                         <input
