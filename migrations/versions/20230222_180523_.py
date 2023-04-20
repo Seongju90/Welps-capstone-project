@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('city', sa.String(length=255), nullable=False),
     sa.Column('state', sa.String(length=255), nullable=False),
     sa.Column('country', sa.String(length=255), nullable=False),
-    sa.Column('zipcode', sa.Integer(), nullable=False),
+    sa.Column('zipcode', sa.String(length=255), nullable=False),
     sa.Column('price', sa.String(length=255), nullable=False),
     sa.Column('phone_number', sa.String(length=255), nullable=False),
     sa.Column('preview_image', sa.String(length=255), nullable=False),

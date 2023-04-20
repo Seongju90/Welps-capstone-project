@@ -98,7 +98,7 @@ export default function RestaurantFormModal() {
                 </label>
                 <label>
                         <input
-                            type="number"
+                            type="text"
                             value={zipcode}
                             onChange={(e) => setZipcode(e.target.value)}
                             placeholder="Zipcode"
