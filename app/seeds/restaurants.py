@@ -184,8 +184,8 @@ restaurants = [
         'phone_number': '408-727-9726',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/lKEoDOzrVsg-1Fcbqer4ig/348s.jpg',
         #24 hours
-        'start_hours': '24 hours ALL DAY',
-        'end_hours': '24 hours ALL DAY',
+        'start_hours': 'Open 24 hours',
+        'end_hours': 'Open 24 hours',
     },
     {
         'owner_id': 2,

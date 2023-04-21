@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, IntegerField
-from wtforms.validators import DataRequired, Length, ValidationError, Regexp
-# importing re module to  use the match method in my regex custom validator
-import re
+from wtforms.validators import DataRequired, Length, ValidationError, Regexp, URL
+from datetime import datetime
 from app.models import Restaurant
 
 
@@ -14,22 +13,19 @@ def phonenumber_exists(form, field):
         raise ValidationError("Phone number already exists for a different restaurant")
 
 
-# def custom_regex_validator(regex_pattern, message=None):
-#     """
-#     Custom validator that checks if field matches the regex pattern inserted.
-#     """
-#     # re.compile => compiles the regex pattern into a regular expression object in order to use
-#     # match() or search() methods
-#     regex = re.compile(regex_pattern)
+def validate_start_hour(form, field):
+    # form is what the user fills out, start_hour is the field, .data is used to access value that user entered
+    start_hour_str = form.start_hours.data
+    # field is object being validated, *where is the validator being placed, in which field*
+    end_hour_str = field.data
 
-#     def validate(form, field):
-#         message = message or None
-#         if not regex.match(field.data):
-#             message = message or f'Invalid input: {field.data}'
-#         if message is not None:
-#             raise ValidationError(message)
+    # Parse the strings into datetime objects,, %I:%M %p => 12 hour clock format, %I hours, %M minutes, %p AM/PM indicator
+    start_hour = datetime.strptime(start_hour_str, '%I:%M %p').time()
+    end_hour = datetime.strptime(end_hour_str, '%I:%M %p').time()
 
-#     return validate
+    # Compare the time objects
+    if start_hour >= end_hour:
+        raise ValidationError('Ending hour must be later than starting hour.')
 
 
 class RestaurantForm(FlaskForm):
@@ -96,21 +92,38 @@ class RestaurantForm(FlaskForm):
         "Phone Number",
         validators = [
             DataRequired("Phone number is required"),
-            phonenumber_exists
+            phonenumber_exists,
+            Regexp(r'^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$', message='Phone number must be in XXX-XXX-XXXX format')
+            # \(? optional opening parenthesis, \)? option closing parenthesis
+            # ([0-9]{3}) matches three digits in one group ()
+            # [-.●]? optional separator
         ])
     preview_image = StringField(
         "Preview Image",
         validators = [
             DataRequired("Preview Image is required"),
+            URL(require_tld=True, message="Invalid Url"),
+            # If true, then the domain-name portion of the URL must contain a .tld suffix.
+            # tld = top-level-domain => suffix that follows domain name in web address
+            Regexp(r'^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,}(?:\/[\w-]+)+(?:\.(?:jpe?g|gif|png))(?:\?.*)?$', message='Invalid image URL')
+            # https?:\/\/ => matches the start of URL with http:// or with https://
+            # (?:[a-z0-9\-]+\.)+ => Matches one or more domain name segments, separated by a dot. Each segment can contain lowercase letters or hyphens or numbers.
+            # [a-z]{2,} => matches the top-level domain, which consists of two or more lowercase letters
+            # (?:\/[\w-]+)+ => matches one or more path segments consisting of one or more word characters or hyphens separated by forward slashes.
+            # (?:\.(?:jpe?g|gif|png)) => matches a file extension
+            # (?:\?.*)? => matches optional query string at the end
         ])
     start_hours = StringField(
         "Start Hours",
         validators = [
             DataRequired("Starting hours is required"),
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))$', message='Start hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
         ])
     end_hours = StringField(
         "End Hours",
         validators = [
             DataRequired("Ending hours is required"),
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
+            validate_start_hour,
         ])
     submit = SubmitField("Add a Restaurant!")
