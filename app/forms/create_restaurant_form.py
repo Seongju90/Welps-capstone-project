@@ -40,18 +40,20 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Address is required"),
             Length(min=5, max=255, message='Address must be 5 to 255 characters'),
-            Regexp(r'^\d+\s+[a-zA-Z]+(?:\w+\s)?\w+\s+(?:St|Street|Ave|Avenue|Rd|Road|Blvd|Boulevard|Ln|Lane|Dr|Drive|Ct|Court)\.?\s*$',
-                message='Must be a valid address in the following format: 1010 Kiely Blvd')
-            # (?: etc) non-capturin group that matches any of the common street types
+            Regexp(r'^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s+(?:St|Street|Ave|Avenue|Rd|Road|Blvd|Boulevard|Ln|Lane|Dr|Drive|Ct|Court)\.?\s*$',
+                message='Must be a valid address in the following format: 1010 Kiely Blvd, no digits are allowed in street names')
             #  \d+ matches one or more digits, \s+ one or more whitespace
-            # (?:\w+\s)? optional non-capturing group, for street names with two letters Queen Anne
+            # (?:\s+[a-zA-Z]+)* optional match for the optional second word
+            # ? => quanitfier zero or one occurrences
+            # * => quantifer zero or more occurrences
+            # + => quantifier one or more occurrences
         ])
     city = StringField(
         "City",
         validators = [
             DataRequired("City is required"),
             Length(min=5, max=255, message='City must be 5 to 255 characters'),
-            Regexp(r'[a-z,A-Z,\s]+', message='City must only be alphabets')
+            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?$', message='City must only be alphabets')
             # The plus sign + means that the pattern should match one or more occurrences of the preceding character set.
         ])
     state = StringField(
@@ -68,7 +70,7 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Country is required"),
             Length(min=1, max=255, message='Country must be 1 to 255 characters'),
-            Regexp(r'[a-z,A-Z,\s]+', message='Country must only be alphabets')
+            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?$', message='Country must only be alphabets')
         ])
     zipcode = StringField(
         "Zipcode",
