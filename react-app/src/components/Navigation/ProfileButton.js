@@ -5,6 +5,8 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
+import { login } from "../../store/session"
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -37,19 +39,24 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+  const demoUser = async (e) => {
+    await dispatch(login('demo@aa.io', 'password'));
+    setShowMenu(false);
+  }
+
   return (
     <>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
+            <div>{user.username}</div>
+            <div>{user.email}</div>
+            <div>
               <button onClick={handleLogout}>Log Out</button>
-            </li>
+            </div>
           </>
         ) : (
           <>
@@ -64,9 +71,12 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+            <div onClick={demoUser}>
+              Demo user
+            </div>
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }

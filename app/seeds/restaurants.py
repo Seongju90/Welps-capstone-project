@@ -29,8 +29,8 @@ restaurants = [
         'price': '$$$',
         'phone_number': '669-306-4642',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/939DUnel5bqTx1ttIyco2A/348s.jpg',
-        'start_hours': '11:30 AM, 5:00PM',
-        'end_hours': '2:30 PM, 8:30 PM',
+        'start_hours': '11:30 AM',
+        'end_hours': '2:30 PM',
     },
     {
         'owner_id': 3,
@@ -43,8 +43,8 @@ restaurants = [
         'price': '$$$',
         'phone_number': '408-770-3778',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/bbbaXkwRLl-BFEd3LNBC5A/348s.jpg',
-        'start_hours': '11:00 AM, 4:30 PM',
-        'end_hours': '2:30 PM, 9:00 PM',
+        'start_hours': '11:00 AM',
+        'end_hours': '2:30 PM',
     },
     {
         'owner_id': 4,
@@ -57,8 +57,8 @@ restaurants = [
         'price': '$$$$',
         'phone_number': '408-720-8889',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/-4u6nWQ9rUUsAjsUBBP-sA/348s.jpg',
-        'start_hours': '11:30 AM, 5:00 PM',
-        'end_hours': '2:30 PM, 9:00 PM',
+        'start_hours': '11:30 AM',
+        'end_hours': '2:30 PM',
     },
     {
         'owner_id': 5,
@@ -71,8 +71,8 @@ restaurants = [
         'price': '$$',
         'phone_number': '408-973-0604',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/N-242Y3RF8sEfNBSErwImQ/348s.jpg',
-        'start_hours': '11:30AM, 5:30 PM',
-        'end_hours': '1:30 PM, 9:00 PM',
+        'start_hours': '11:30AM',
+        'end_hours': '1:30 PM',
     },
     {
         'owner_id': 6,
@@ -184,8 +184,8 @@ restaurants = [
         'phone_number': '408-727-9726',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/lKEoDOzrVsg-1Fcbqer4ig/348s.jpg',
         #24 hours
-        'start_hours': '24 hours ALL DAY',
-        'end_hours': '24 hours ALL DAY',
+        'start_hours': 'Open 24 hours',
+        'end_hours': 'Open 24 hours',
     },
     {
         'owner_id': 2,
@@ -240,8 +240,8 @@ restaurants = [
         'price': '$$',
         'phone_number': '669-454-9022',
         'preview_image': 'https://s3-media0.fl.yelpcdn.com/bphoto/z1MZmJ0GphRxaQg3OX8PCA/348s.jpg',
-        'start_hours': '11:30 AM, 5:00 PM',
-        'end_hours': '2:30 PM, 9:30 PM',
+        'start_hours': '11:30 AM',
+        'end_hours': '2:30 PM',
     },
     {
         'owner_id': 4,

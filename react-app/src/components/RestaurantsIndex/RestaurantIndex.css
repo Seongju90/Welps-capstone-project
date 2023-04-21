@@ -1,0 +1,13 @@
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.restaurant-main-container {
+    width: 50%;
+}
+
+.google-map-container {
+    width: 50%;
+}

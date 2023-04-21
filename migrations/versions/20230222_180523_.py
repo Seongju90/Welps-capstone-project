@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: dc6159d01f21
-Revises: 
+Revises:
 Create Date: 2023-02-22 18:05:23.864570
 
 """
@@ -46,7 +46,7 @@ def upgrade():
     sa.Column('zipcode', sa.String(length=255), nullable=False),
     sa.Column('price', sa.String(length=255), nullable=False),
     sa.Column('phone_number', sa.String(length=255), nullable=False),
-    sa.Column('preview_image', sa.String(length=255), nullable=True),
+    sa.Column('preview_image', sa.String(length=255), nullable=False),
     sa.Column('start_hours', sa.String(length=255), nullable=False),
     sa.Column('end_hours', sa.String(length=255), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
