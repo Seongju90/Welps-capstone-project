@@ -1,6 +1,7 @@
 /*---------------------- TYPE VARIABLES ----------------------*/
 const ALL_RESTAURANTS = "restaurants/ALL_RESTAURANTS"
-const CREATE_RESTAURANT = "restaurants/CREATE_RESTAURANT"
+const CREATE_RESTAURANTS = "restaurants/CREATE_RESTAURANTS"
+const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -10,9 +11,16 @@ const actionLoadAllRestaurants = (payload) => {
     }
 }
 
-const actionCreateRestaurant = (payload) => {
+const actionCreateRestaurants = (payload) => {
     return {
-        type: CREATE_RESTAURANT,
+        type: CREATE_RESTAURANTS,
+        payload
+    }
+}
+
+const actionMyRestaurants = (payload) => {
+    return {
+        type: MY_RESTAURANTS,
         payload
     }
 }
@@ -28,10 +36,12 @@ export const thunkAllRestaurants = () => async (dispatch) => {
         dispatch(actionLoadAllRestaurants(data));
         return response
     }
+
     else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) return data;
     }
+
     else return { errors: ["An error occurred. Please try again."] }
 }
 
@@ -44,7 +54,7 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
 
     if(response.ok) {
         const data = await response.json();
-        dispatch(actionCreateRestaurant(data))
+        dispatch(actionCreateRestaurants(data))
         return null
     }
 
@@ -52,6 +62,25 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
         const data = await response.json();
         if (data.errors) return data;
     }
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
+export const thunkMyRestaurants = (id) =>  async (dispatch) => {
+    const response = await fetch(`/api/users/${id}/restaurants`, {
+        headers: { "Content-Type": "application/json"},
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(actionMyRestaurants(data))
+        return response
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
     else return { errors: ["An error occurred. Please try again."] }
 }
 
@@ -63,9 +92,12 @@ const restaurantsReducer = (state = initialState, action) => {
         case ALL_RESTAURANTS:
             newState = normalizeArray(action.payload.Restaurants)
             return newState
-        case CREATE_RESTAURANT:
+        case CREATE_RESTAURANTS:
             // console.log('reducer action', action.payload)
             newState[action.payload.id] = action.payload
+            return newState
+        case MY_RESTAURANTS:
+            newState = normalizeArray(action.payload.Restaurants)
             return newState
         default:
             return state;

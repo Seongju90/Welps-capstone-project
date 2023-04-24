@@ -7,7 +7,9 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 
 
+import MyProfilePage from "./components/MyProfilePage";
 import RestaurantsIndex from "./components/RestaurantsIndex";
+import SplashPage from "./components/SplashPage";
 
 
 function App() {
@@ -28,8 +30,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path="/users/:id/myprofile">
+            <MyProfilePage/>
+          </Route>
           <Route path="/restaurants">
             <RestaurantsIndex/>
+          </Route>
+          <Route exact path="/">
+            <SplashPage/>
           </Route>
         </Switch>
       )}

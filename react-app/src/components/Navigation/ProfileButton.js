@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
-
-import { login } from "../../store/session"
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -36,13 +33,13 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
-
-  const demoUser = async (e) => {
-    await dispatch(login('demo@aa.io', 'password'));
-    setShowMenu(false);
+  const clickMyProfile = (e) => {
+    e.preventDefault();
+    history.push(`/users/${user.id}/myprofile`)
+    setShowMenu(false)
   }
+
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
@@ -50,32 +47,12 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" />
       </button>
       <div className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <div>
-              <button onClick={handleLogout}>Log Out</button>
-            </div>
-          </>
-        ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-            <div onClick={demoUser}>
-              Demo user
-            </div>
-          </>
-        )}
+        <>
+          <div onClick={clickMyProfile}>My Profile</div>
+          <div>{user.username}</div>
+          <div>{user.email}</div>
+          <div onClick={handleLogout}>Log Out</div>
+        </>
       </div>
     </>
   );

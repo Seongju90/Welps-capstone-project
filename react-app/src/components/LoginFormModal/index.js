@@ -17,9 +17,14 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
+
+  const demoUser = async (e) => {
+    await dispatch(login('demo@aa.io', 'password'));
+    closeModal()
+  }
 
   return (
     <>
@@ -50,6 +55,9 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+      <div onClick={demoUser}>
+        Demo user
+      </div>
     </>
   );
 }
