@@ -66,7 +66,7 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
 }
 
 export const thunkMyRestaurants = (id) =>  async (dispatch) => {
-    const response = await fetch(`/api/users/${id}/restaurants`, {
+    const response = await fetch(`/api/users/${id}/myprofile`, {
         headers: { "Content-Type": "application/json"},
     })
 

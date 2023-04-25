@@ -25,15 +25,16 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/restaurants')
+@user_routes.route('/<int:id>/myprofile')
 @login_required
 def my_restaurants(id):
     """
     Query for a user's restaurants by id and return it in a dictionary
     """
-    restaurants = Restaurant.query.filter(Restaurant.owner_id == id)
+    all_restaurants = Restaurant.query.filter(Restaurant.owner_id == id).all()
+    restaurant_dict = [restaurant.to_dict() for restaurant in all_restaurants]
 
-    return {"Restaurants": restaurants.to_dict()}
+    return {"Restaurants": restaurant_dict}
 
 
 @user_routes.route('/<int:id>/reviews')
@@ -42,6 +43,7 @@ def my_reviews(id):
     """
     Query for user's reviews by id and return it in a dictionary
     """
-    reviews = Review.query.filter(Review.user_id == id)
+    all_reviews = Review.query.filter(Review.user_id == id).all()
+    reviews_dict = [review.to_dict() for review in all_reviews]
 
-    return {"Reviews": reviews.to_dict()}
+    return {"Reviews": reviews_dict}
