@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
@@ -11,6 +12,14 @@ import SignupFormModal from "../SignupFormModal";
 
 function Navigation(){
 	const sessionUser = useSelector(state => state.session.user);
+	const history = useHistory()
+
+
+	const clickListRestaurants = (e) => {
+		e.preventDefault();
+		history.push(`/restaurants`)
+	}
+
 
 	return (
 		<div className="nav-bar-main-container">
@@ -19,6 +28,9 @@ function Navigation(){
 			</div>
 			<div className="right-nav-container">
 				<div className="create-main-container">
+					<div className="list-all-restaurants" onClick={clickListRestaurants}>
+						List All Restaurants
+					</div>
 					<div className="create-restaurant-container">
 						<OpenModalButton
 							buttonText="List a Restaurant"

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Restaurant, Review, RestaurantImage, Category, db
-from app.forms import RestaurantForm
+from app.forms import RestaurantForm, EditRestaurantForm
 from .auth_routes import validation_errors_to_error_messages
 
 
@@ -73,5 +73,40 @@ def create_restaurant():
         db.session.commit()
 
         return newRestaurant.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# Edit Restaurant
+@restaurant_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_my_restaurant(id):
+    """
+    Edit existing restaurant
+    """
+    form = EditRestaurantForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    restaurant_to_edit = Restaurant.query.get(id)
+
+    print('backend route', restaurant_to_edit)
+    if form.validate_on_submit():
+
+        # no commas at the end or it will turn everything into tuples
+        restaurant_to_edit.name=form.data["name"]
+        restaurant_to_edit.owner_id=current_user.id
+        restaurant_to_edit.address=form.data["address"]
+        restaurant_to_edit.city=form.data["city"]
+        restaurant_to_edit.state=form.data["state"]
+        restaurant_to_edit.country=form.data["country"]
+        restaurant_to_edit.zipcode=form.data["zipcode"]
+        restaurant_to_edit.price=form.data["price"]
+        restaurant_to_edit.phone_number=form.data["phone_number"]
+        restaurant_to_edit.preview_image=form.data["preview_image"]
+        restaurant_to_edit.start_hours=form.data["start_hours"]
+        restaurant_to_edit.end_hours=form.data["end_hours"]
+
+        db.session.commit()
+        return restaurant_to_edit.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

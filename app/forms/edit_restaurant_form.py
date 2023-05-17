@@ -2,15 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, Regexp, URL
 from datetime import datetime
-from app.models import Restaurant
-
-
-def phonenumber_exists(form, field):
-    # Checking if the phone number exists
-    phone_number = field.data
-    restaurant = Restaurant.query.filter(Restaurant.phone_number == phone_number).first()
-    if restaurant:
-        raise ValidationError("Phone number already exists for a different restaurant")
 
 
 def validate_start_hour(form, field):
@@ -28,7 +19,7 @@ def validate_start_hour(form, field):
         raise ValidationError('Ending hour must be later than starting hour.')
 
 
-class RestaurantForm(FlaskForm):
+class EditRestaurantForm(FlaskForm):
     name = StringField(
         "Restaurant Name",
         validators = [
@@ -94,7 +85,6 @@ class RestaurantForm(FlaskForm):
         "Phone Number",
         validators = [
             DataRequired("Phone number is required"),
-            phonenumber_exists,
             Regexp(r'^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$', message='Phone number must be in XXX-XXX-XXXX format')
             # \(? optional opening parenthesis, \)? option closing parenthesis
             # ([0-9]{3}) matches three digits in one group ()

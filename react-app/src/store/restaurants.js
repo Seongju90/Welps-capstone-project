@@ -2,6 +2,8 @@
 const ALL_RESTAURANTS = "restaurants/ALL_RESTAURANTS"
 const CREATE_RESTAURANTS = "restaurants/CREATE_RESTAURANTS"
 const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
+const EDIT_RESTAURANTS = "restaurants/EDIT_RESTAURANTS"
+
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -21,6 +23,13 @@ const actionCreateRestaurants = (payload) => {
 const actionMyRestaurants = (payload) => {
     return {
         type: MY_RESTAURANTS,
+        payload
+    }
+}
+
+const actionEditRestaurants = (payload) => {
+    return {
+        type: EDIT_RESTAURANTS,
         payload
     }
 }
@@ -66,7 +75,7 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
 }
 
 export const thunkMyRestaurants = (id) =>  async (dispatch) => {
-    const response = await fetch(`/api/users/${id}/myprofile`, {
+    const response = await fetch(`/api/users/${id}/restaurants`, {
         headers: { "Content-Type": "application/json"},
     })
 
@@ -74,6 +83,32 @@ export const thunkMyRestaurants = (id) =>  async (dispatch) => {
         const data = await response.json();
         dispatch(actionMyRestaurants(data))
         return response
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
+export const thunkEditRestaurants = (id, form) => async (dispatch) => {
+    // this fetch hits the backend route, no link to the actual URL
+    const response = await fetch(`/api/restaurants/${id}`,{
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+
+        dispatch(actionEditRestaurants(data))
+
+        return null;
     }
 
     else if (response.status < 500) {
@@ -98,6 +133,10 @@ const restaurantsReducer = (state = initialState, action) => {
             return newState
         case MY_RESTAURANTS:
             newState = normalizeArray(action.payload.Restaurants)
+            return newState
+        case EDIT_RESTAURANTS:
+            console.log('reducer',action.payload)
+            newState[action.payload.id] = action.payload
             return newState
         default:
             return state;

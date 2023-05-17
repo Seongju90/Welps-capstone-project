@@ -1,6 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User, Restaurant, Review
+from app.forms import RestaurantForm
+from .auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
 
@@ -25,7 +27,7 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/myprofile')
+@user_routes.route('/<int:id>/restaurants')
 @login_required
 def my_restaurants(id):
     """

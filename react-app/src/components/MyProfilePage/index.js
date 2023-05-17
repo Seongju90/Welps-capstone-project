@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkMyRestaurants } from '../../store/restaurants';
 import './MyProfilePage.css';
-
+import OpenModalButton from '../OpenModalButton';
+import EditRestaurantModal from '../EditRestaurantModal';
 
 export default function MyProfilePage () {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ export default function MyProfilePage () {
     return (
         <div className="my-profile-main-container">
             {myResaurantsArr.map(restaurant => (
-                <div className="restaurant-info-main-container">
+                <div className="restaurant-info-main-container" key={restaurant.id}>
                     <img
                     className="restaurant-card-img"
                     src={restaurant.preview_image}
@@ -27,7 +28,11 @@ export default function MyProfilePage () {
                     />
                     <div className="info-container">
                         <div>{restaurant.name}</div>
-                        <div>Edit</div>
+                        <OpenModalButton
+                            buttonText="Edit"
+                            modalComponent={<EditRestaurantModal restaurant={restaurant}/>}
+                            buttonName="edit-restaurant-button"
+                        />
                         <div>Delete</div>
                     </div>
                 </div>
