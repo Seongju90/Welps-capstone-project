@@ -1,0 +1,28 @@
+/* Main container for Single Restaurant */
+.single-card-main-container {
+    display: flex;
+
+}
+
+
+/* Img Banner */
+.single-img-banner {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    height: 425px;
+    position: relative;
+}
+
+/* Info Overlay */
+.info-overlay {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}

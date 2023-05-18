@@ -10,6 +10,7 @@ import Navigation from "./components/Navigation";
 import MyProfilePage from "./components/MyProfilePage";
 import RestaurantsIndex from "./components/RestaurantsIndex";
 import SplashPage from "./components/SplashPage";
+import SingleRestaurantPage from "./components/SingleRestaurantPage";
 
 
 function App() {
@@ -34,7 +35,11 @@ function App() {
           <Route path="/users/:id/myprofile">
             <MyProfilePage/>
           </Route>
-          <Route path="/restaurants">
+          <Route exact path="/restaurants/:restaurantId">
+            <SingleRestaurantPage/>
+          </Route>
+          {/* either place more detail route above, or use exact path for everything */}
+          <Route exact path="/restaurants">
             <RestaurantsIndex/>
           </Route>
           <Route exact path="/">

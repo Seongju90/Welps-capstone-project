@@ -53,14 +53,14 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("City is required"),
             Length(min=5, max=255, message='City must be 5 to 255 characters'),
-            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?$', message='City must only be alphabets')
+            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?\s*$', message='City must only be alphabets')
             # The plus sign + means that the pattern should match one or more occurrences of the preceding character set.
         ])
     state = StringField(
         "State",
         validators = [
             DataRequired("State is required"),
-            Regexp(r'^[A-Z]{2}$', message='State must be two consecutive capital letters'),
+            Regexp(r'^[A-Z]{2}\s*$', message='State must be two consecutive capital letters'),
             # r indicates raw string, because \ , \n can be use for new lines or escape characters
             # and in regex we use that, so it treats are literal characters, rather than escape character
             # custom_regex_validator(r'^[A-Z]{2}$', 'State must be two consecutive capital letters')
@@ -70,7 +70,7 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Country is required"),
             Length(min=1, max=255, message='Country must be 1 to 255 characters'),
-            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?$', message='Country must only be alphabets')
+            Regexp(r'^[a-zA-Z]+(?:\s+[a-zA-Z]+)?\s*$', message='Country must only be alphabets')
         ])
     zipcode = StringField(
         "Zipcode",
@@ -119,13 +119,13 @@ class RestaurantForm(FlaskForm):
         "Start Hours",
         validators = [
             DataRequired("Starting hours is required"),
-            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))$', message='Start hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))\s*$', message='Start hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
         ])
     end_hours = StringField(
         "End Hours",
         validators = [
             DataRequired("Ending hours is required"),
-            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))\s*$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
             validate_start_hour,
         ])
     submit = SubmitField("Add a Restaurant!")

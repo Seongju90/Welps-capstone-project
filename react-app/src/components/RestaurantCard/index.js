@@ -1,17 +1,19 @@
 import './RestaurantCard.css';
+import { Link } from "react-router-dom";
+
 
 export default function RestaurantCard ({restaurant}) {
     const { id, preview_image, name, reviews, categories, price } = restaurant
 
     return (
         <div className="restaurant-card-container">
-            <div className="restaurant-img-container">
+            <Link className="restaurant-img-container" to={`/restaurants/${restaurant.id}`}>
                 <img
                     className="restaurant-card-img"
                     src={preview_image}
                     alt="preview-restaurant-img"
                 />
-            </div>
+            </Link>
             <div className="restaurant-info-container">
                 <div className="restaurant-name">{id}. {name}</div>
                 <div className="restaurant-total-reviews">{reviews?.length}</div>
@@ -21,7 +23,6 @@ export default function RestaurantCard ({restaurant}) {
                     )) : 'None'}
                     <span className="restaurant-price">{price}</span>
                 </div>
-                {/* <div className="restaurant-price">{price}</div> */}
                 <div className="restaurant-review">{reviews?.length ? reviews[0]?.review : "No Reviews Yet" } </div>
             </div>
         </div>

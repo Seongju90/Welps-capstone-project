@@ -45,6 +45,39 @@ def all_restaurants():
     # Use jsonify to return Content-Type header as application/json, other it will default to text/html
     return  jsonify({"Restaurants": restaurant_dict})
 
+
+# GET one restaurant
+@restaurant_routes.route('/<int:id>')
+def get_one_restaurant(id):
+
+    # Take the restaurant id from the id inputted in the thunk, and reassign to variable
+    restaurant_id = id
+
+    # Query for that restaurant
+    restaurant = Restaurant.query.get(id)
+    restaurant_dict = restaurant.to_dict()
+
+    # Query for the Reviews, Images, and Categories and append it to the main restaurant query after turning it into dictionary
+    reviews = Review.query.filter(Review.restaurant_id == restaurant_id).all()
+    images = RestaurantImage.query.filter(RestaurantImage.restaurant_id == restaurant_id).all()
+    categories = Category.query \
+                .join(Category.restaurant) \
+                .filter(Restaurant.id == restaurant_id) \
+                .all()
+
+    # Turn all the return from queries into dict so I can manipulate the data
+    review_dict = [ review.to_dict() for review in reviews]
+    images_dict = [ image.to_dict() for image in images]
+    categories_dict = [ category.to_dict() for category in categories]
+
+     # Add information to each restaurant
+    restaurant_dict['reviews'] = review_dict
+    restaurant_dict['images'] = images_dict
+    restaurant_dict['categories'] = categories_dict
+
+    # what you return as the key Single_Restaurant here, reflects in action.payload in frontend store
+    return jsonify({"Single_Restaurant": restaurant_dict})
+
 # CREATE a restaurant
 @restaurant_routes.route('', methods=['POST'])
 @login_required
