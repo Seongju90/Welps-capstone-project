@@ -3,7 +3,7 @@ const ALL_RESTAURANTS = "restaurants/ALL_RESTAURANTS"
 const CREATE_RESTAURANTS = "restaurants/CREATE_RESTAURANTS"
 const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
 const EDIT_RESTAURANTS = "restaurants/EDIT_RESTAURANTS"
-
+const DELETE_RESTAURANTS = "restaurants/DELETE_RESTAURANTS"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -30,6 +30,13 @@ const actionMyRestaurants = (payload) => {
 const actionEditRestaurants = (payload) => {
     return {
         type: EDIT_RESTAURANTS,
+        payload
+    }
+}
+
+const actionDeleteRestaurants = (payload) => {
+    return {
+        type: DELETE_RESTAURANTS,
         payload
     }
 }
@@ -119,6 +126,25 @@ export const thunkEditRestaurants = (id, form) => async (dispatch) => {
     else return { errors: ["An error occurred. Please try again."] }
 }
 
+export const thunkDeleteRestaurants = (id) => async (dispatch) => {
+    console.log('in thunk', id)
+    const response = await fetch(`/api/restaurants/${id}`, {
+        method: 'DELETE',
+    })
+
+    if (response.ok) {
+        dispatch(actionDeleteRestaurants(id))
+        return null
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
 /*---------------------- RESTAURANTS REDUCER ----------------------*/
 const initialState = {}
 const restaurantsReducer = (state = initialState, action) => {
@@ -128,15 +154,18 @@ const restaurantsReducer = (state = initialState, action) => {
             newState = normalizeArray(action.payload.Restaurants)
             return newState
         case CREATE_RESTAURANTS:
-            // console.log('reducer action', action.payload)
             newState[action.payload.id] = action.payload
             return newState
         case MY_RESTAURANTS:
             newState = normalizeArray(action.payload.Restaurants)
             return newState
         case EDIT_RESTAURANTS:
-            console.log('reducer',action.payload)
             newState[action.payload.id] = action.payload
+            return newState
+        case DELETE_RESTAURANTS:
+            console.log('action reudcer', action)
+            console.log('reducer', action.payload)
+            delete newState[action.payload]
             return newState
         default:
             return state;

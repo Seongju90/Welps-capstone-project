@@ -110,3 +110,30 @@ def edit_my_restaurant(id):
         return restaurant_to_edit.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# Delete a Restaurant
+@restaurant_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_my_restaurant(id):
+    """
+    Delete a restaurant
+    """
+
+    restaurant_to_delete = Restaurant.query.get(id)
+    print('backend, again', restaurant_to_delete)
+    print('backend', restaurant_to_delete.owner_id)
+
+    if (restaurant_to_delete.owner_id == current_user.id):
+        db.session.delete(restaurant_to_delete)
+        db.session.commit()
+
+        return jsonify({
+            "message": "Successfully deleted the restaurant"
+        })
+
+    else:
+        return jsonify({
+            "message": "Forbidden, you are not the owner of the review",
+            "status_code": 403
+        }), 403

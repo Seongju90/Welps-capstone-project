@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { thunkMyRestaurants } from '../../store/restaurants';
+import { thunkMyRestaurants, thunkDeleteRestaurants } from '../../store/restaurants';
 import './MyProfilePage.css';
 import OpenModalButton from '../OpenModalButton';
 import EditRestaurantModal from '../EditRestaurantModal';
+import { useHistory } from "react-router-dom"
 
 export default function MyProfilePage () {
     const dispatch = useDispatch()
+    const history = useHistory()
     const currentUser = useSelector(state => state.session?.user)
 
     const myRestaurantsObj = useSelector(state => state.restaurants)
@@ -15,7 +17,14 @@ export default function MyProfilePage () {
 
     useEffect(() => {
         dispatch(thunkMyRestaurants(currentUser.id))
-    }, [dispatch])
+    }, [dispatch, currentUser.id])
+
+
+    const deleteRestaurant = (id) => {
+        console.log('hello', id)
+        dispatch(thunkDeleteRestaurants(id))
+    }
+
 
     return (
         <div className="my-profile-main-container">
@@ -33,7 +42,7 @@ export default function MyProfilePage () {
                             modalComponent={<EditRestaurantModal restaurant={restaurant}/>}
                             buttonName="edit-restaurant-button"
                         />
-                        <div>Delete</div>
+                        <div onClick={() => deleteRestaurant(restaurant.id)}>Delete</div>
                     </div>
                 </div>
             ))}
