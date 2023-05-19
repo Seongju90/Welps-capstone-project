@@ -6,7 +6,7 @@ import './RestaurantIndex.css';
 
 export default function RestaurantsIndex() {
     const dispatch = useDispatch()
-    const restaurantsObj = useSelector(state => state.restaurants)
+    const restaurantsObj = useSelector(state => state?.restaurants)
     const restaurantsArray = Object.values(restaurantsObj)
 
 

@@ -1,11 +1,17 @@
 /* Main container for Single Restaurant */
-.single-card-main-container {
-    display: flex;
+/* .single-card-main-container {
 
-}
+} */
 
 
 /* Img Banner */
+.banner-container {
+    display: flex;
+    justify-content: center;
+    /* to get the overlay at the bottom */
+    align-items: flex-end;
+}
+
 .single-img-banner {
     display: flex;
     flex-wrap: nowrap;
@@ -17,12 +23,10 @@
 /* Info Overlay */
 .info-overlay {
     position: absolute;
-    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: white;
     padding: 20px;
+    font-size: 40px;
+    font-weight: bold;
 }

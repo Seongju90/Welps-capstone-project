@@ -3,8 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Restaurant, Review, RestaurantImage, Category, db
 from app.forms import RestaurantForm, EditRestaurantForm
 from .auth_routes import validation_errors_to_error_messages
-
-
+import math
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -43,7 +42,7 @@ def all_restaurants():
 
 
     # Use jsonify to return Content-Type header as application/json, other it will default to text/html
-    return  jsonify({"Restaurants": restaurant_dict})
+    return  {"Restaurants": restaurant_dict}
 
 
 # GET one restaurant
@@ -74,6 +73,18 @@ def get_one_restaurant(id):
     restaurant_dict['reviews'] = review_dict
     restaurant_dict['images'] = images_dict
     restaurant_dict['categories'] = categories_dict
+
+    # Calculate avgRating and add it to the review dict
+    # totalRatings = 0
+    # for review in all_reviews_dict:
+    #     review['rating'] += totalRatings
+
+    # # calculate the avg, use round to get 1 decimal place
+    # avgRating = round(totalRatings / len(all_reviews_dict), 1)
+
+    # print('$$$$$$$$$$$$$$$$backend$$$$$$', all_reviews_dict)
+    # add the avgRating property to the reviews dict
+    # all_reviews_dict["avgRating"] = avgRating
 
     # what you return as the key Single_Restaurant here, reflects in action.payload in frontend store
     return jsonify({"Single_Restaurant": restaurant_dict})
@@ -170,3 +181,17 @@ def delete_my_restaurant(id):
             "message": "Forbidden, you are not the owner of the review",
             "status_code": 403
         }), 403
+
+
+# Get Reviews of Restaurant
+@restaurant_routes.route('/<int:id>/reviews')
+def all_reviews_of_restaurant(id):
+    """
+    Get all reviews of a restaurant by it's id
+    """
+
+    all_reviews = Review.query.filter(Review.restaurant_id == id).all()
+    all_reviews_dict = [review.to_dict() for review in all_reviews]
+
+
+    return {"Reviews": all_reviews_dict}

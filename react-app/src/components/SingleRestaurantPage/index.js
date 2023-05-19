@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { thunkOneRestaurant } from '../../store/restaurants';
+import { thunkAllReviews } from '../../store/reviews';
 
 
 export default function SingleRestaurantPage () {
@@ -11,6 +12,8 @@ export default function SingleRestaurantPage () {
     // extracting the restaurant id from the url parameter
     const { restaurantId } = useParams()
     const restaurant = useSelector(state => state?.restaurants.singleRestaurant)
+    const all_reviews_dict = useSelector(state => state?.reviews)
+    const all_reviews_array = Object.values(all_reviews_dict)
 
 
     // Manipulating the images array for the banner
@@ -24,25 +27,35 @@ export default function SingleRestaurantPage () {
         imagesArr = imagesArr.slice(0,3)
     }
 
-
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
+        dispatch(thunkAllReviews(restaurantId))
     }, [dispatch])
 
 
     return (
         <div className="single-card-main-container">
-            <div className="single-img-banner">
-                {imagesArr?.map(images => (
-                    <img
-                        src={images.url}
-                        alt="extra-images-for-restaurant"
-                        key={images.id}
-                    />
-                ))}
+            <div className="banner-container">
+                <div className="single-img-banner">
+                    {imagesArr?.map(images => (
+                        <img
+                            src={images.url}
+                            alt="extra-images-for-restaurant"
+                            key={images.id}
+                        />
+                    ))}
+                </div>
+                <div className="info-overlay">
+                    {restaurant?.name}
+                </div>
             </div>
-            <div className="info-overlay">
-                Hello!
+            <div className="reviews-container">
+                {all_reviews_array.map(review => (
+                    <div>
+                        {review.rating}
+                        {review.review}
+                    </div>
+                ))}
             </div>
         </div>
     )

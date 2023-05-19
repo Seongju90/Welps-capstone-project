@@ -51,9 +51,7 @@ const actionDeleteRestaurants = (payload) => {
 
 /*---------------------- THUNK ACTION CREATORS ----------------------*/
 export const thunkAllRestaurants = () => async (dispatch) => {
-    const response = await fetch(`/api/restaurants`, {
-        headers: { "Content-Type": "application/json"},
-    })
+    const response = await fetch(`/api/restaurants`)
 
     if (response.ok) {
         const data = await response.json();
@@ -179,24 +177,24 @@ const restaurantsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ALL_RESTAURANTS:
             newState = normalizeArray(action.payload.Restaurants)
-            return newState
+            return newState;
         case ONE_RESTAURANTS:
             // clear old data and state
             newState = {}
             newState.singleRestaurant = action.payload.Single_Restaurant
-            return newState
+            return newState;
         case CREATE_RESTAURANTS:
             newState[action.payload.id] = action.payload
-            return newState
+            return newState;
         case MY_RESTAURANTS:
             newState = normalizeArray(action.payload.Restaurants)
-            return newState
+            return newState;
         case EDIT_RESTAURANTS:
             newState[action.payload.id] = action.payload
-            return newState
+            return newState;
         case DELETE_RESTAURANTS:
             delete newState[action.payload]
-            return newState
+            return newState;
         default:
             return state;
     }
@@ -206,7 +204,7 @@ export default restaurantsReducer
 
 
 /* ---------- NORMALIZE ARRAY HELPER FUNCTION ----------*/
-const normalizeArray = (array) => {
+export const normalizeArray = (array) => {
     if (!(array instanceof Array)) throw new Error('Can not normalize data that is not an array')
 
     // create an empty object to normalize the data array
