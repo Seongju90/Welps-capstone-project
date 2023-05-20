@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkMyRestaurants, thunkDeleteRestaurants } from '../../store/restaurants';
 import { useHistory } from "react-router-dom"
-import { thunkMyReviews } from '../../store/reviews';
+import { thunkDeleteReview, thunkMyReviews } from '../../store/reviews';
 import './MyProfilePage.css';
 import OpenModalButton from '../OpenModalButton';
 import EditRestaurantModal from '../EditRestaurantModal';
@@ -27,15 +27,19 @@ export default function MyProfilePage () {
 
     const deleteRestaurant = (id) => {
         dispatch(thunkDeleteRestaurants(id))
+        dispatch(thunkMyRestaurants(currentUser.id))
+        window.alert("Restaurant has been deleted!")
     }
 
-    // const deleteReview = (id) => {
-    //     dispatch()
-    // }
+    const deleteReview = (id) => {
+        dispatch(thunkDeleteReview(id))
+        dispatch(thunkMyReviews)
+        window.alert("Review has been deleted!")
+    }
 
     return (
         <div className="my-profile-main-container">
-            {myResaurantsArr.map(restaurant => (
+            {myResaurantsArr?.map(restaurant => (
                 <div className="restaurant-info-main-container" key={restaurant.id}>
                     <img
                     className="restaurant-card-img"
@@ -53,7 +57,7 @@ export default function MyProfilePage () {
                     </div>
                 </div>
             ))}
-            {myReviewsArr.map(review => (
+            {myReviewsArr?.map(review => (
                 <div className="review-info-main-container" key={review.id}>
                     {review.review}
                     <OpenModalButton
@@ -61,6 +65,7 @@ export default function MyProfilePage () {
                         modalComponent={<EditReviewModal reviews={review}/>}
                         buttonName="edit-review-button"
                     />
+                    <div onClick={() => deleteReview(review.id)}>Delete</div>
                 </div>
             ))}
         </div>

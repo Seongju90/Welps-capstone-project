@@ -22,8 +22,7 @@ export default function EditReviewModal ({reviews}) {
             'rating': rating
         }
 
-        console.log('handlesubmit$4$$', reviewData)
-        const data = await dispatch(thunkEditReview(reviewData, reviews.id))
+        const data = await dispatch(thunkEditReview(reviewData, reviews?.id))
 
         if(data) {
             setErrors(data.errors)

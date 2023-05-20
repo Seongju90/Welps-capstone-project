@@ -148,7 +148,6 @@ export const thunkEditRestaurants = (id, form) => async (dispatch) => {
 }
 
 export const thunkDeleteRestaurants = (id) => async (dispatch) => {
-    console.log('in thunk', id)
     const response = await fetch(`/api/restaurants/${id}`, {
         method: 'DELETE',
     })

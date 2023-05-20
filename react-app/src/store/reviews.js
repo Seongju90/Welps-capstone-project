@@ -39,6 +39,13 @@ const actionEditReview = (payload) => {
     }
 }
 
+const actionDeleteReview = (payload) => {
+    return {
+        type: DELETE_REVIEWS,
+        payload
+    }
+}
+
 /*---------------------- THUNK ACTION CREATORS ----------------------*/
 
 export const thunkAllReviews = (id) => async(dispatch) => {
@@ -96,8 +103,6 @@ export const thunkCreateReview = (review, user, restaurant) => async (dispatch) 
 }
 
 export const thunkEditReview = (review, id) => async (dispatch) => {
-    console.log('thunk', review)
-    console.log('thunk id of review', id)
     const response = await fetch(`/api/reviews/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -108,6 +113,24 @@ export const thunkEditReview = (review, id) => async (dispatch) => {
         const data = await response.json()
         dispatch(actionEditReview(data))
         return null;
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
+export const thunkDeleteReview = (id) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${id}`, {
+        method: 'DELETE',
+    })
+
+    if (response.ok) {
+        dispatch(actionDeleteReview(id))
+        return null
     }
 
     else if (response.status < 500) {
@@ -133,6 +156,9 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         case UPDATE_REVIEWS:
             newState[action.payload.id] = action.payload
+            return newState;
+        case DELETE_REVIEWS:
+            delete newState[action.payload]
             return newState;
         default:
             return state;

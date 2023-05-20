@@ -172,8 +172,6 @@ def delete_my_restaurant(id):
     """
 
     restaurant_to_delete = Restaurant.query.get(id)
-    print('backend, again', restaurant_to_delete)
-    print('backend', restaurant_to_delete.owner_id)
 
     if (restaurant_to_delete.owner_id == current_user.id):
         db.session.delete(restaurant_to_delete)
