@@ -8,6 +8,7 @@ import OpenModalButton from '../OpenModalButton';
 import RestaurantFormModal from '../RestaurantFormModal';
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import ReviewFormModal from "../ReviewFormModal";
 
 
 function Navigation(){
@@ -29,7 +30,7 @@ function Navigation(){
 			<div className="right-nav-container">
 				<div className="create-main-container">
 					<div className="list-all-restaurants" onClick={clickListRestaurants}>
-						List All Restaurants
+						Browse the Restaurants
 					</div>
 					<div className="create-restaurant-container">
 						<OpenModalButton
@@ -41,7 +42,7 @@ function Navigation(){
 					<div className="create-review-container">
 						<OpenModalButton
 							buttonText="Write a Review"
-							modalComponent={<RestaurantFormModal/>}
+							modalComponent={<ReviewFormModal/>}
 							buttonName="create-review-button"
 						/>
 					</div>

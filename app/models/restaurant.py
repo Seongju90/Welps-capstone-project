@@ -29,6 +29,7 @@ class Restaurant(db.Model):
     owner = db.relationship('User', back_populates='restaurant')
     image = db.relationship('RestaurantImage', back_populates="restaurant", cascade="all, delete")
     # add relationship between restaurant and review?
+    review = db.relationship('Review', back_populates='restaurant', cascade='all, delete')
 
     restaurants = db.relationship(
         'User',

@@ -40,7 +40,7 @@ export default function EditRestaurantModal({restaurant}) {
             'start_hours': startHours,
             'end_hours': endHours,
         }
-        console.log('frontend', restaurant.id)
+
 
         const data = await dispatch(thunkEditRestaurants(restaurant.id, restaurantData))
 

@@ -43,7 +43,6 @@ export default function RestaurantFormModal() {
         }))
 
         if(data) {
-            console.log(data)
             setErrors(data.errors)
         } else {
             // if data is created properly, it returns null which close Modal.

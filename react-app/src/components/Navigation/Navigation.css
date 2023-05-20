@@ -6,6 +6,7 @@
   flex-direction: column;
   right: 3vw;
   top: 75px;
+  z-index: 1;
 }
 
 .hidden {

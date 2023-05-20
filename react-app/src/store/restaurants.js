@@ -107,9 +107,7 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
 }
 
 export const thunkMyRestaurants = (id) =>  async (dispatch) => {
-    const response = await fetch(`/api/users/${id}/restaurants`, {
-        headers: { "Content-Type": "application/json"},
-    })
+    const response = await fetch(`/api/users/${id}/restaurants`)
 
     if (response.ok) {
         const data = await response.json();
@@ -137,9 +135,7 @@ export const thunkEditRestaurants = (id, form) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json()
-
         dispatch(actionEditRestaurants(data))
-
         return null;
     }
 

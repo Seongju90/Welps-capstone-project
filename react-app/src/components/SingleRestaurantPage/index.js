@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
-
+import ReviewCard from '../ReviewCard'
 
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch()
@@ -51,10 +51,7 @@ export default function SingleRestaurantPage () {
             </div>
             <div className="reviews-container">
                 {all_reviews_array.map(review => (
-                    <div>
-                        {review.rating}
-                        {review.review}
-                    </div>
+                    <ReviewCard review={review} />
                 ))}
             </div>
         </div>
