@@ -39,8 +39,20 @@ def all_restaurants():
         review_dict = [ review.to_dict() for review in reviews]
         images_dict = [ image.to_dict() for image in images]
         categories_dict = [ category.to_dict() for category in categories]
+        # if there are no reviews avgRating is 0, otherwise calculate avgRating
+        if (len(review_dict) == 0):
+            avgRating = 0
+        else:
+        # Calculate avgRating and add it to the review dict
+            totalRatings = 0
+            for review in review_dict:
+                totalRatings += review['rating']
+            # calculate the avg, use round to get 1 decimal place, then round again to nearest half
+            avgRating = round(totalRatings / len(review_dict), 1)
+            avgRating = round_to_nearest_half(avgRating)
 
         # Add information to each restaurant
+        restaurant["avgRating"] = avgRating
         restaurant['reviews'] = review_dict
         restaurant['images'] = images_dict
         restaurant['categories'] = categories_dict
@@ -69,20 +81,23 @@ def get_one_restaurant(id):
                 .filter(Restaurant.id == restaurant_id) \
                 .all()
 
-
     # Turn all the return from queries into dict so I can manipulate the data
     review_dict = [ review.to_dict() for review in reviews]
     images_dict = [ image.to_dict() for image in images]
     categories_dict = [ category.to_dict() for category in categories]
 
-    # Calculate avgRating and add it to the review dict
-    totalRatings = 0
-    for review in review_dict:
-        totalRatings += review['rating']
+    # if there are no reviews avgRating is 0, otherwise calculate avgRating
+    if (len(review_dict) == 0):
+        avgRating = 0
+    else:
+        # Calculate avgRating and add it to the review dict
+        totalRatings = 0
+        for review in review_dict:
+            totalRatings += review['rating']
 
-    # calculate the avg, use round to get 1 decimal place, then round again to nearest half
-    avgRating = round(totalRatings / len(review_dict), 1)
-    avgRating = round_to_nearest_half(avgRating)
+        # calculate the avg, use round to get 1 decimal place, then round again to nearest half
+        avgRating = round(totalRatings / len(review_dict), 1)
+        avgRating = round_to_nearest_half(avgRating)
 
      # Add information to each restaurant
     restaurant_dict["avgRating"] = avgRating

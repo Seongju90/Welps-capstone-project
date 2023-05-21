@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { thunkCreateRestaurant } from "../../store/restaurants";
 import { useModal } from "../../context/Modal";
 import "./RestaurantForm.css"
@@ -8,6 +9,7 @@ import { ReactComponent as Cityscape } from '../../assets/cityscape_300x233_v2.y
 
 export default function RestaurantFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { closeModal } = useModal();
 
 
@@ -16,7 +18,7 @@ export default function RestaurantFormModal() {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [country, setCountry] = useState("")
-    const [zipcode, setZipcode] = useState()
+    const [zipcode, setZipcode] = useState(0)
     const [price, setPrice] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [previewImage, setPreviewImage] = useState("")
@@ -28,7 +30,7 @@ export default function RestaurantFormModal() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = await dispatch(thunkCreateRestaurant({
+        const formData = {
             'name': name,
             'address': address,
             'city': city,
@@ -40,13 +42,19 @@ export default function RestaurantFormModal() {
             'preview_image': previewImage,
             'start_hours': startHours,
             'end_hours': endHours
-        }))
+        }
 
-        if(data) {
-            setErrors(data.errors)
-        } else {
-            // if data is created properly, it returns null which close Modal.
+        const newRestaurant = await dispatch(thunkCreateRestaurant(formData))
+            .catch(
+                async (res) => {
+                    const data = await res.json()
+                    if (data && data.errors) setErrors(data.errors)
+                }
+            )
+
+        if (newRestaurant.id) {
             closeModal()
+            history.push(`/restaurants/${newRestaurant.id}`)
         }
     }
 

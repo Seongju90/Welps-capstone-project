@@ -1,7 +1,9 @@
 /* Main container for Single Restaurant */
-/* .single-card-main-container {
-
-} */
+.single-card-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 /* Img Banner */
@@ -14,19 +16,97 @@
 
 .single-img-banner {
     display: flex;
-    flex-wrap: nowrap;
     flex-direction: row;
     height: 425px;
-    position: relative;
+    /* using filter property to adjust brightness so we can see text easier */
+    filter: brightness(70%);
 }
 
 /* Info Overlay */
 .info-overlay {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    color: white;
+    justify-content: space-between;
+    align-items: flex-end;
     padding: 20px;
-    font-size: 40px;
+    min-width: 1200px;
+}
+
+.single-restaurant-name {
+    color: white;
+    font-size: 50px;
     font-weight: bold;
+}
+
+.single-restaurant-ratings {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.single-restaurant-price-categories {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.single-restaurant-hours {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.see-photo-button {
+    color:white;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+
+/* Bottom Info Container */
+.bottom-info-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 85%;
+    margin-top: 2em;
+}
+
+
+.bottom-right-main-container {
+    width: 25%;
+    height: 100%;
+}
+
+.phone-address-box{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebebeb;
+    padding: 10px;
+    border-radius: 4px;
+    position: sticky;
+}
+
+.phone-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.address-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 10px;
+    color: rgba(110,112,114,1);
+    font-size: 13px;
+    font-weight: 600;
 }
