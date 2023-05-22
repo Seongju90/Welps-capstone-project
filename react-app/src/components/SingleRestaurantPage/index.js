@@ -8,6 +8,8 @@ import ReviewCard from '../ReviewCard'
 
 import phone from '../../icons/phone-call.svg'
 import directions from '../../icons/directions-svgrepo-com.svg'
+import map from '../../icons/google-map.png'
+
 
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch()
@@ -47,6 +49,8 @@ export default function SingleRestaurantPage () {
     const digitsOnly = restaurant?.phone_number.replace(/\D/g,"")
     const formatNumber = `(${digitsOnly?.slice(0, 3)}) ${digitsOnly?.slice(3, 6)}-${digitsOnly?.slice(6)}`
 
+    // Creating hour string
+    const hourString = `${restaurant?.start_hours} - ${restaurant?.end_hours}`
 
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
@@ -80,9 +84,55 @@ export default function SingleRestaurantPage () {
             </div>
             <div className="bottom-info-main-container">
                 <div className="bottom-left-main-container">
-                    {all_reviews_array.map(review => (
-                        <ReviewCard review={review} />
-                    ))}
+                    <div className="location-hour-container">
+                        <div className="location-map">
+                            <div>Location & Hours</div>
+                            <img
+                                height={'150'}
+                                width={'315'}
+                                src={map}
+                                alt={'google-map'}
+                            />
+                            <div>
+                                {address}
+                            </div>
+                        </div>
+                        <div className="hours-container">
+                            <div className="sub-hours-container">
+                                <div>Sun</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Mon</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Tues</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Wed</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Thurs</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Fri</div>
+                                <div>{hourString}</div>
+                            </div>
+                            <div className="sub-hours-container">
+                                <div>Sat</div>
+                                <div>{hourString}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="review-main-container">
+                        {all_reviews_array.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div>
                 </div>
                 <div className="bottom-right-main-container">
                     <div className="phone-address-box">

@@ -80,6 +80,12 @@
     height: 100%;
 }
 
+.bottom-left-main-container {
+    width: 70%;
+    min-width: 511px;
+}
+
+/* Phone and Address Container */
 .phone-address-box{
     display: flex;
     flex-direction: column;
@@ -87,6 +93,8 @@
     padding: 10px;
     border-radius: 4px;
     position: sticky;
+    min-width: 250px;
+    max-width: 250px;
 }
 
 .phone-box {
@@ -109,4 +117,36 @@
     color: rgba(110,112,114,1);
     font-size: 13px;
     font-weight: 600;
+}
+
+/* Location and Hours Container */
+.location-hour-container {
+    display: flex;
+    flex-direction: row;
+    min-width: 426px;
+}
+
+.location-map {
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1vw;
+    padding-top: 1vw;
+}
+
+.hours-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 27%;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1vw;
+    border-top: 1px solid lightgrey;
+    padding-top: 1vw;
+}
+
+.sub-hours-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 200px;
 }
