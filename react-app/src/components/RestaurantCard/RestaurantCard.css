@@ -1,6 +1,15 @@
+/* Restaurant container */
+
 .restaurant-card-container {
     display: flex;
     flex-direction: row;
+    padding: 2vw;
+    border-top: 1px solid lightgrey;
+}
+
+.restaurant-card-container:hover {
+    cursor:pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .restaurant-card-img {
@@ -8,16 +17,43 @@
     height: 200px;
 }
 
-.restaurant-info-container {
+/* Restaurant info container */
+.index-restaurant-info-container {
     display: flex;
     flex-direction: column;
     margin-left: 1vw;
+    justify-content: space-evenly;
 }
 
-.category-list {
+
+.index-category-list {
     display: flex;
 }
 
-.restaurant-price{
+.index-restaurant-category {
+    border: 1px solid lightgrey;
+    background-color: #eeeeef;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.index-restaurant-price{
+    margin-left: 1vw;
+    border: 1px solid lightgrey;
+    background-color: #eeeeef;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.index-restaurant-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.index-restaurant-review {
+    display: flex;
+}
+
+.index-review-preview {
     margin-left: 1vw;
 }
