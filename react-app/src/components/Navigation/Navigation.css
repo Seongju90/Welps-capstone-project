@@ -1,17 +1,33 @@
-/* Navigation - container */
-
+/* Profile Dropdown */
 .profile-dropdown {
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 3vw;
-  top: 75px;
+  right: 3.5vw;
+  top: 85px;
   z-index: 1;
+  border: 1px solid lightgrey;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  border-radius: 5px;
 }
 
 .hidden {
   display: none;
 }
+
+.profile-dropdown > div {
+  margin: 1vw;
+  padding: 10px;
+}
+
+.profile-dropdown > div:hover {
+  background-color: #eeeeef;
+  border-radius: 4px;
+}
+
+/* Navigation - container */
 
 .nav-bar-main-container {
   display: flex;
@@ -29,6 +45,8 @@
 .right-nav-container {
   display: flex;
   flex-direction: row;
+  font-size: 14px;
+  align-items: center
 }
 
 
@@ -53,14 +71,31 @@
   flex-direction: row;
 }
 
-.create-restaurant-button {
+.nav-create-restaurant-button {
   padding: 1vw;
+  cursor: pointer;
 }
 
-.create-review-button {
+/* .create-review-button {
   padding: 1vw;
+} */
+
+.nav-list-all-restaurants {
+  padding: 1vw;
+  cursor: pointer;
 }
 
-.list-all-restaurants {
+.nav-list-all-restaurants:hover,
+.nav-create-restaurant-button:hover {
+  background-color: #eeeeef;
+  border-radius: 4px;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+}
+
+/* Profile Button CSS */
+.nav-profile-user-img {
+  width: 30px;
+  height: 30px;
   padding: 1vw;
+  cursor: pointer;
 }

@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory } from "react-router-dom";
 
+import profile2 from "../../icons/profile-user2.svg"
+
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -43,16 +45,12 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <img className="nav-profile-user-img" src={profile2} alt={"profile-svg-2"} onClick={openMenu}/>
       <div className={ulClassName} ref={ulRef}>
-        <>
-          <div onClick={clickMyProfile}>My Profile</div>
-          <div>{user.username}</div>
-          <div>{user.email}</div>
-          <div onClick={handleLogout}>Log Out</div>
-        </>
+          <div className="drop-down-name">{user.username}</div>
+          <div className="drop-down-email">{user.email}</div>
+          <div className="drop-down-myprofile"onClick={clickMyProfile}>My Profile</div>
+          <div className="drop-down-logout"onClick={handleLogout}>Log Out</div>
       </div>
     </>
   );

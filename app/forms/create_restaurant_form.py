@@ -10,7 +10,7 @@ def phonenumber_exists(form, field):
     phone_number = field.data
     restaurant = Restaurant.query.filter(Restaurant.phone_number == phone_number).first()
     if restaurant:
-        raise ValidationError("Phone number already exists for a different restaurant")
+        raise ValidationError(message="Phone number already exists for a different restaurant")
 
 
 def validate_start_hour(form, field):
@@ -19,13 +19,18 @@ def validate_start_hour(form, field):
     # field is object being validated, *where is the validator being placed, in which field*
     end_hour_str = field.data
 
+
+
+    # if len(start_hour_str) == 0 :
+    #     raise ValidationError(message='Please input a starting hour for comparison')
+
     # Parse the strings into datetime objects,, %I:%M %p => 12 hour clock format, %I hours, %M minutes, %p AM/PM indicator
     start_hour = datetime.strptime(start_hour_str, '%I:%M %p').time()
     end_hour = datetime.strptime(end_hour_str, '%I:%M %p').time()
 
     # Compare the time objects
     if start_hour >= end_hour:
-        raise ValidationError('Ending hour must be later than starting hour.')
+        raise ValidationError(message='Ending hour must be later than starting hour.')
 
 
 class RestaurantForm(FlaskForm):
