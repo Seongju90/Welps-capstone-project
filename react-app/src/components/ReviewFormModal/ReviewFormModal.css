@@ -1,0 +1,39 @@
+/* Reivew main container */
+
+.review-main-container {
+    display: flex;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+}
+
+.review-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 2vw;
+}
+
+
+/* Input for reviews */
+.review-input-form {
+    width: 90%;
+    height: 350px;
+}
+
+.review-rating-input-form {
+    width: 90%;
+}
+
+/* Review button */
+.review-create-submit-button {
+    border-radius: 4px;
+    background-color: red;
+    color: white;
+    height: 40px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    width: 90%;
+    margin-top: 1vw;
+}

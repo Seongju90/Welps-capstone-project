@@ -6,7 +6,7 @@ import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewCard'
 import ReviewFormModal from "../ReviewFormModal";
-import OpenModalButton from '../OpenModalButton';
+import OpenReviewModalButton from '../OpenReviewModalButton';
 
 import phone from '../../icons/phone-call.svg'
 import directions from '../../icons/directions-svgrepo-com.svg'
@@ -16,6 +16,8 @@ import star from '../../icons/star-svg2-com.svg'
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    // const [onButtonClick, setOnButtonClick] = useState(false)
 
     // extracting the restaurant id from the url parameter
     const { restaurantId } = useParams()
@@ -92,14 +94,8 @@ export default function SingleRestaurantPage () {
                         {/* conditional render the review button for owner */}
                         {restaurant?.owner_id !== user.id &&
                             <div className="star-review-button">
-                                <img
-                                    className="star-svg-review"
-                                    height={'24'}
-                                    width={'24'}
-                                    src={star}
-                                    alt={'star-svg'}
-                                />
-					            <OpenModalButton
+                                {/* Used a custom modal for this button so clicking star will open modal */}
+					            <OpenReviewModalButton
 					                buttonText="Write a Review"
 					                modalComponent={<ReviewFormModal/>}
 					                buttonName="single-index-create-review-button"

@@ -72,6 +72,7 @@
     justify-content: space-between;
     width: 85%;
     margin-top: 2em;
+    max-width: 1100px;
 }
 
 
