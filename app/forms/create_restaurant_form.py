@@ -21,8 +21,8 @@ def validate_start_hour(form, field):
 
 
 
-    # if len(start_hour_str) == 0 :
-    #     raise ValidationError(message='Please input a starting hour for comparison')
+    if len(start_hour_str) == 0 :
+        raise ValidationError(message='Please input a starting hour for comparison')
 
     # Parse the strings into datetime objects,, %I:%M %p => 12 hour clock format, %I hours, %M minutes, %p AM/PM indicator
     start_hour = datetime.strptime(start_hour_str, '%I:%M %p').time()
@@ -131,6 +131,6 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Ending hours is required"),
             Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM|am|pm))\s*$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
-            # validate_start_hour,
+            validate_start_hour
         ])
     submit = SubmitField("Add a Restaurant!")

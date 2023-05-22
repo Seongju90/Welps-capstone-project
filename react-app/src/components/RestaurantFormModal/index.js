@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { thunkCreateRestaurant } from "../../store/restaurants";
@@ -52,20 +52,8 @@ export default function RestaurantFormModal() {
         } else if (newRestaurant){
             setErrors(newRestaurant.errors)
         }
-
-        // parse start and end hours to compared, backend validations dont work properly
-        const startHour = new Date(`1970-01-01 ${formData.start_hours}`)
-        const endHour = new Date(`1970-01-01 ${formData.end_hours}`)
-
-
-        if(startHour >= endHour) {
-            errors["validate_start_hour"] = "Ending hour must be later than the starting hour"
-        }
-
-        console.log('frtonendform3', errors)
-        console.log('frontend outside of if block', errors.validate_start_hour)
-        console.log('frontend outside of if block', typeof errors.validate_start_hour)
     }
+
     return (
         <div className="create-form-main-container">
             <form className="create-restaurant-container" onSubmit={handleSubmit}>
@@ -197,8 +185,6 @@ export default function RestaurantFormModal() {
                     {errors.start_hours && <div className="error">{errors.start_hours}</div>}
                     {errors.end_hours && <div className="error">{errors.end_hours}</div>}
                     {errors.validate_start_hour && <div className="error">{errors.validate_start_hour}</div>}
-                    {1 === 1 && <div className="error">{errors.validate_start_hour}</div>}
-                    {errors.hasOwnProperty('validate_start_hour') && <div className="error">{errors.validate_start_hour}</div>}
                 </div>
                 <button className="create-submit-button" type="submit" id="modal-submit">Submit</button>
             </form>

@@ -1,7 +1,7 @@
 import './SingleRestaurantPage.css'
 import { useParams, useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewCard'
@@ -14,8 +14,9 @@ import map from '../../icons/google-map.png'
 import star from '../../icons/star-svg2-com.svg'
 
 export default function SingleRestaurantPage () {
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     // extracting the restaurant id from the url parameter
     const { restaurantId } = useParams()
     const restaurant = useSelector(state => state?.restaurants.singleRestaurant)
@@ -101,7 +102,7 @@ export default function SingleRestaurantPage () {
 					            <OpenModalButton
 					                buttonText="Write a Review"
 					                modalComponent={<ReviewFormModal/>}
-					                buttonName="create-review-button"
+					                buttonName="single-index-create-review-button"
 					            />
                             </div>
                         }
