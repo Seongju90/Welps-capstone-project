@@ -29,7 +29,7 @@
     justify-content: space-between;
     align-items: flex-end;
     padding: 20px;
-    min-width: 1200px;
+    min-width: 960px;
 }
 
 .single-restaurant-name {
@@ -76,13 +76,31 @@
 
 
 .bottom-right-main-container {
+    /* position: relative; */
     width: 25%;
-    height: 100%;
+    height: fit-content;
 }
 
 .bottom-left-main-container {
     width: 70%;
     min-width: 511px;
+}
+
+/* Create review container */
+.star-review-button {
+    display: flex;
+    flex-direction: row;
+    max-width: 175px;
+    align-items: center;
+    background-color: red;
+    border-radius: 4px;
+    margin-bottom: 1vw;
+    justify-content: center;
+    color: white;
+}
+
+.star-svg-review {
+    padding-left: 5px;
 }
 
 /* Phone and Address Container */
@@ -92,7 +110,7 @@
     border: 1px solid #ebebeb;
     padding: 10px;
     border-radius: 4px;
-    position: sticky;
+    /* position: sticky; */
     min-width: 250px;
     max-width: 250px;
 }

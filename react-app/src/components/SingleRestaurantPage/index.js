@@ -5,11 +5,13 @@ import { useEffect } from 'react';
 import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewCard'
+import ReviewFormModal from "../ReviewFormModal";
+import OpenModalButton from '../OpenModalButton';
 
 import phone from '../../icons/phone-call.svg'
 import directions from '../../icons/directions-svgrepo-com.svg'
 import map from '../../icons/google-map.png'
-
+import star from '../../icons/star-svg2-com.svg'
 
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch()
@@ -17,6 +19,7 @@ export default function SingleRestaurantPage () {
     // extracting the restaurant id from the url parameter
     const { restaurantId } = useParams()
     const restaurant = useSelector(state => state?.restaurants.singleRestaurant)
+    const user = useSelector(state => state?.session?.user)
     const all_reviews_dict = useSelector(state => state?.reviews)
     const all_reviews_array = Object.values(all_reviews_dict)
     const categoryArr = restaurant?.categories
@@ -84,9 +87,28 @@ export default function SingleRestaurantPage () {
             </div>
             <div className="bottom-info-main-container">
                 <div className="bottom-left-main-container">
+                    <div className="create-review-container">
+                        {/* conditional render the review button for owner */}
+                        {restaurant?.owner_id !== user.id &&
+                            <div className="star-review-button">
+                                <img
+                                    className="star-svg-review"
+                                    height={'24'}
+                                    width={'24'}
+                                    src={star}
+                                    alt={'star-svg'}
+                                />
+					            <OpenModalButton
+					                buttonText="Write a Review"
+					                modalComponent={<ReviewFormModal/>}
+					                buttonName="create-review-button"
+					            />
+                            </div>
+                        }
+					</div>
                     <div className="location-hour-container">
                         <div className="location-map">
-                            <div>Location & Hours</div>
+                            <div style={{fontWeight: 'bold'}}>Location & Hours</div>
                             <img
                                 height={'150'}
                                 width={'315'}
@@ -133,6 +155,26 @@ export default function SingleRestaurantPage () {
                             <ReviewCard review={review} />
                         ))}
                     </div>
+                    {/* <div className="review-main-container">
+                        {all_reviews_array.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div>
+                    <div className="review-main-container">
+                        {all_reviews_array.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div>
+                    <div className="review-main-container">
+                        {all_reviews_array.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div>
+                    <div className="review-main-container">
+                        {all_reviews_array.map(review => (
+                            <ReviewCard review={review} />
+                        ))}
+                    </div> */}
                 </div>
                 <div className="bottom-right-main-container">
                     <div className="phone-address-box">

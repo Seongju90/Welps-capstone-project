@@ -1,0 +1,12 @@
+.review-card-main-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1vw;
+}
+
+.user-main-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}

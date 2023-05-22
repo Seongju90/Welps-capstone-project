@@ -1,9 +1,127 @@
+/* Main containers */
 .create-restaurant-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    width: 90%;
+    padding-bottom: 15px;
 }
 
 .create-form-main-container {
     display: flex;
     flex-direction: row;
+    min-width: 600px;
+    min-height: 700px;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+/* Form containers */
+.restaurant-form-name,
+.restaurant-form-address,
+.restaurant-form-price,
+.restaurant-form-phone,
+.restaurant-form-preview,
+.address-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-container {
+    margin-bottom: 5px;
+}
+
+.city-state-container,
+.country-zipcode-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.start-end-hour-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
+
+.restaurant-form-start-hour,
+.restaurant-form-end-hour {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+/* Input styling */
+.input-city,
+.input-state,
+.input-country,
+.input-zipcode {
+    height: 40px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
+
+.input-city,
+.input-country {
+    margin-right: 5px;
+}
+
+.input-state,
+.input-zipcode {
+    margin-left: 5px;
+}
+
+.input-country,
+.input-zipcode {
+    margin-top: 5px;
+}
+
+
+.input-name,
+.input-address,
+.input-phone,
+.input-preview,
+.input-start-hour,
+.input-end-hour,
+.input-price {
+    border: 1px solid lightgrey;
+    height: 40px;
+    border-radius: 5px;
+}
+
+
+.input-start-hour {
+    margin-right: 5px;
+}
+
+.input-end-hour {
+    margin-left: 5px;
+}
+
+.end-label {
+    margin-left: 5px;
+}
+
+/* Button submit */
+.create-submit-button {
+    border-radius: 4px;
+    background-color: red;
+    color: white;
+    height: 40px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.create-submit-button:hover {
+    /* offset-x | offset-y | blur-radius | color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5)
+}
+
+/* error styling */
+[class*="error"] {
+    padding: 5px;
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
 }

@@ -40,7 +40,7 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Address is required"),
             Length(min=5, max=255, message='Address must be 5 to 255 characters'),
-            Regexp(r'^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s+(?:St|Street|Ave|Avenue|Rd|Road|Blvd|Boulevard|Ln|Lane|Dr|Drive|Ct|Court)\.?\s*$',
+            Regexp(r'^\d+\s+[a-zA-Z]+(?:\s+[a-zA-Z]+)*\s+(?:St(?:reet)?|Ave(?:nue)?|Rd(?:oad)?|Blvd(?:oulevard)?|Ln(?:ane)?|Dr(?:ive)?|Ct(?:ourt)?)?\.?\s*$',
                 message='Must be a valid address in the following format: 1010 Kiely Blvd, no digits are allowed in street names')
             #  \d+ matches one or more digits, \s+ one or more whitespace
             # (?:\s+[a-zA-Z]+)* optional match for the optional second word
@@ -95,7 +95,7 @@ class RestaurantForm(FlaskForm):
         validators = [
             DataRequired("Phone number is required"),
             phonenumber_exists,
-            Regexp(r'^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$', message='Phone number must be in XXX-XXX-XXXX format')
+            Regexp(r'^\(?([0-9]{3})\)?[-.●/]?([0-9]{3})[-.●/]?([0-9]{4})$', message='Phone number must be in XXX-XXX-XXXX format')
             # \(? optional opening parenthesis, \)? option closing parenthesis
             # ([0-9]{3}) matches three digits in one group ()
             # [-.●]? optional separator
@@ -119,13 +119,13 @@ class RestaurantForm(FlaskForm):
         "Start Hours",
         validators = [
             DataRequired("Starting hours is required"),
-            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))\s*$', message='Start hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM|am|pm))\s*$', message='Start hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
         ])
     end_hours = StringField(
         "End Hours",
         validators = [
             DataRequired("Ending hours is required"),
-            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM))\s*$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
-            validate_start_hour,
+            Regexp(r'^(?:Open 24 hours|(?:0?[1-9]|1[012]):[0-5][0-9]\s(?:AM|PM|am|pm))\s*$', message='End hours must be either the following format: Open 24 hours | XX:XX AM | XX: XX PM' ),
+            # validate_start_hour,
         ])
     submit = SubmitField("Add a Restaurant!")

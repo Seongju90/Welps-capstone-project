@@ -39,13 +39,13 @@ function Navigation(){
 							buttonName="create-restaurant-button"
 						/>
 					</div>
-					<div className="create-review-container">
+					{/* <div className="create-review-container">
 						<OpenModalButton
 							buttonText="Write a Review"
 							modalComponent={<ReviewFormModal/>}
 							buttonName="create-review-button"
 						/>
-					</div>
+					</div> */}
 			</div>
 			{!sessionUser ?
 				<div className="login-signup-container">

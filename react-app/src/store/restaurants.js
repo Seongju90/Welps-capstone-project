@@ -99,6 +99,11 @@ export const thunkCreateRestaurant = (form) => async (dispatch) => {
         return newRes
     }
 
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
     else return { errors: ["An error occurred. Please try again."] }
 }
 
