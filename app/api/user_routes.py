@@ -73,4 +73,11 @@ def my_reviews(id):
     all_reviews = Review.query.filter(Review.user_id == id).all()
     reviews_dict = [review.to_dict() for review in all_reviews]
 
+    for review in reviews_dict:
+
+        restaurant = Restaurant.query.get(review['restaurant_id'])
+        restaurant_dict = restaurant.to_dict()
+
+        review['restaurant_info'] = restaurant_dict
+
     return {"Reviews": reviews_dict}
