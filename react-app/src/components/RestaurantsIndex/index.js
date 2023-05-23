@@ -27,7 +27,7 @@ export default function RestaurantsIndex() {
                 ))}
             </div>
             <div className="google-map-container">
-                <img src={map} alt={"restaurant-index-map"}/>
+                <img className="index-map-img" src={map} alt={"restaurant-index-map"}/>
             </div>
         </div>
     )

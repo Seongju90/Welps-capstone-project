@@ -1,13 +1,15 @@
+/* Left restaurant container */
+
 .main-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    /* By setting flex: 1 on a flex item, you are essentially telling it to grow and shrink
+    equally with other items and initially take up an equal share of the available space. */
+    flex: 1;
 }
 
-.restaurant-main-container {
-    width: 50%;
-}
+/* Right map container */
 
-.google-map-container {
-    width: 50%;
+.index-map-img {
+    width: max-content;
 }
