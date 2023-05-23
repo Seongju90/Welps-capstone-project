@@ -3,9 +3,8 @@ import './ReviewCard.css'
 import profile from '../../icons/profile-user.svg'
 
 export default function ReviewCard ({review}) {
-    console.log(review)
+
     const userInfo = review?.user_info[0]
-    console.log(userInfo)
 
     return (
         <div className='review-card-main-container'>

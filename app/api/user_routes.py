@@ -54,12 +54,12 @@ def my_restaurants(id):
             for review in review_dict:
                 totalRatings += review['rating']
 
-            avgRating = round(totalRatings / len(review_dict), 1)
-            avgRating = round_to_nearest_half(avgRating)
+                avgRating = round(totalRatings / len(review_dict), 1)
+                avgRating = round_to_nearest_half(avgRating)
 
-        restaurant["avgRating"] = avgRating
-        restaurant['reviews'] = review_dict
-        restaurant['categories'] = categories_dict
+                restaurant["avgRating"] = avgRating
+                restaurant['reviews'] = review_dict
+                restaurant['categories'] = categories_dict
 
     return {"Restaurants": restaurant_dict}
 
@@ -72,18 +72,5 @@ def my_reviews(id):
     """
     all_reviews = Review.query.filter(Review.user_id == id).all()
     reviews_dict = [review.to_dict() for review in all_reviews]
-
-    if (len(reviews_dict) == 0):
-        avgRating = 0
-    else:
-    # Calculate avgRating and add it to the review dict
-        totalRatings = 0
-        for review in reviews_dict:
-            totalRatings += review['rating']
-        # calculate the avg, use round to get 1 decimal place, then round again to nearest half
-        avgRating = round(totalRatings / len(reviews_dict), 1)
-        avgRating = round_to_nearest_half(avgRating)
-
-    reviews_dict["avgRating"] = avgRating
 
     return {"Reviews": reviews_dict}

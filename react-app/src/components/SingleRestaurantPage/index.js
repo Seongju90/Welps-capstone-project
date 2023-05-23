@@ -1,7 +1,7 @@
 import './SingleRestaurantPage.css'
-import { useParams, useHistory } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewCard'
@@ -11,11 +11,10 @@ import OpenReviewModalButton from '../OpenReviewModalButton';
 import phone from '../../icons/phone-call.svg'
 import directions from '../../icons/directions-svgrepo-com.svg'
 import map from '../../icons/google-map.png'
-import star from '../../icons/star-svg2-com.svg'
+
 
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     // const [onButtonClick, setOnButtonClick] = useState(false)
 
@@ -33,7 +32,7 @@ export default function SingleRestaurantPage () {
         category = categoryArr[0].type
     } else if (categoryArr?.length > 1) {
         // extract all the categorys, then join it with a comma, so no trailing comma at the end
-        category = categoryArr.map((cat) => cat.type).join(', ');
+        category = categoryArr?.map((cat) => cat.type).join(', ');
     }
 
     // Manipulating the images array for the banner
@@ -61,7 +60,7 @@ export default function SingleRestaurantPage () {
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
         dispatch(thunkAllReviews(restaurantId))
-    }, [dispatch])
+    }, [dispatch, restaurantId])
 
 
     return (
@@ -148,7 +147,7 @@ export default function SingleRestaurantPage () {
                         </div>
                     </div>
                     <div className="review-main-container">
-                        {all_reviews_array.map(review => (
+                        {all_reviews_array?.map(review => (
                             <ReviewCard review={review} />
                         ))}
                     </div>

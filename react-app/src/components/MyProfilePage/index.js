@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { thunkMyRestaurants, thunkDeleteRestaurants } from '../../store/restaurants';
-import { useHistory } from "react-router-dom"
 import { thunkDeleteReview, thunkMyReviews } from '../../store/reviews';
 import './MyProfilePage.css';
 import OpenModalButton from '../OpenModalButton';
@@ -14,13 +13,12 @@ import deleteIcon from '../../icons/delete.svg';
 
 export default function MyProfilePage () {
     const dispatch = useDispatch()
-    const history = useHistory()
 
     // conditional variables to change menu
     const [showMenu, setShowMenu] = useState('restaurants')
     const [selectedOption, setSelectedOption] = useState('restaurants')
 
-    console.log('frontend', showMenu)
+
     // Selecting state variables
     const currentUser = useSelector(state => state.session?.user)
 
@@ -30,6 +28,15 @@ export default function MyProfilePage () {
     const myReviewsObj = useSelector(state => state?.reviews)
     const myReviewsArr = Object.values(myReviewsObj)
 
+    // Use Effects for thunks
+    useEffect(() => {
+        dispatch(thunkMyRestaurants(currentUser.id))
+        dispatch(thunkMyReviews(currentUser.id))
+    }, [dispatch, currentUser.id])
+
+    console.log(useSelector(state => console.log(state)))
+    console.log('frontend', showMenu)
+    console.log('review tab',myReviewsObj)
     // function to call to change options
     const handleOptionClick = (option) => {
         setSelectedOption(option);
@@ -40,12 +47,10 @@ export default function MyProfilePage () {
         setShowMenu(menu)
     };
 
-    // Use Effects for thunks
-    useEffect(() => {
-        dispatch(thunkMyRestaurants(currentUser.id))
-        dispatch(thunkMyReviews(currentUser.id))
-    }, [dispatch, currentUser.id])
-
+    const handleOptionAndShowClick = (option) => {
+        handleOptionClick(option);
+        handleShowMenu(option);
+    }
 
     const deleteRestaurant = (id) => {
         dispatch(thunkDeleteRestaurants(id))
@@ -78,13 +83,13 @@ export default function MyProfilePage () {
                 <div className="options-container">
                     <div
                         className={`switch-option ${selectedOption === 'restaurants' ? 'active' : ''}`}
-                        onClick={() => handleOptionClick('restaurants')}
+                        onClick={() => handleOptionAndShowClick('restaurants')}
                     >
                         My Restaurants
                     </div>
                     <div
                         className={`switch-option ${selectedOption === 'reviews' ? 'active' : ''}`}
-                        onClick={() => handleOptionClick('reviews')}
+                        onClick={() => handleOptionAndShowClick('reviews')}
                     >
                         My Reviews
                     </div>
@@ -93,7 +98,6 @@ export default function MyProfilePage () {
                 {showMenu === 'restaurants' &&
                     <div
                         className="myprofile-restaurant-overall-container"
-                        onClick={() => handleShowMenu('restaurants')}
                     >
                         {myResaurantsArr?.map(restaurant => (
                             <div className="myprofile-restaurant-info-main-container" key={restaurant.id}>
@@ -108,12 +112,12 @@ export default function MyProfilePage () {
                                     <div className="myprofile-restaurant-info-container">
                                         <div>{restaurant.name}</div>
                                         <div className="myprofile-categories">
-                                        {restaurant.categories.map(category => (
+                                        {restaurant.categories?.map(category => (
                                             <div>{category.type}</div>
                                         ))}
                                         </div>
                                         <div>{`${restaurant?.address} ${restaurant?.city}, ${restaurant?.state} ${restaurant?.zipcode}`}</div>
-                                        <div>Avg Rating: {restaurant?.avgRating}</div>
+                                        <div>Avg Rating: {restaurant?.avgRating ? restaurant?.avgRating : "No Reviews Yet"}</div>
                                     </div>
                                 </div>
                                 <div className="myprofile-edit-delete-container">
@@ -140,7 +144,6 @@ export default function MyProfilePage () {
                 {showMenu === 'reviews' &&
                     <div
                         className="myprofile-restaurant-review-overall-container"
-                        onClick={() => handleShowMenu('reviews')}
                     >
                         {myReviewsArr?.map(review => (
                             <div className="myprofile-review-main-container" key={review.id}>

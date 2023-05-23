@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { thunkCreateRestaurant } from "../../store/restaurants";
 import { useModal } from "../../context/Modal";
 import "./RestaurantForm.css"
-import { ReactComponent as Cityscape } from '../../assets/cityscape_300x233_v2.yji-deccc3d10e15b4494be1.svg';
-
 
 export default function RestaurantFormModal() {
     const dispatch = useDispatch();
