@@ -17,9 +17,10 @@ export default function MyProfilePage () {
     const history = useHistory()
 
     // conditional variables to change menu
-    const [showMyRestaurant, setShowMyRestuarant] = useState(true)
-    const [showMyReview, setShowMyReview] = useState(false)
+    const [showMenu, setShowMenu] = useState('restaurants')
+    const [selectedOption, setSelectedOption] = useState('restaurants')
 
+    console.log('frontend', showMenu)
     // Selecting state variables
     const currentUser = useSelector(state => state.session?.user)
 
@@ -29,7 +30,15 @@ export default function MyProfilePage () {
     const myReviewsObj = useSelector(state => state?.reviews)
     const myReviewsArr = Object.values(myReviewsObj)
 
+    // function to call to change options
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+    };
 
+    // function to call to change menu
+    const handleShowMenu = (menu) => {
+        setShowMenu(menu)
+    };
 
     // Use Effects for thunks
     useEffect(() => {
@@ -67,12 +76,25 @@ export default function MyProfilePage () {
             </div>
             <div className="myprofile-options-values-container">
                 <div className="options-container">
-                    <div>My Restaurants</div>
-                    <div>My Reviews</div>
+                    <div
+                        className={`switch-option ${selectedOption === 'restaurants' ? 'active' : ''}`}
+                        onClick={() => handleOptionClick('restaurants')}
+                    >
+                        My Restaurants
+                    </div>
+                    <div
+                        className={`switch-option ${selectedOption === 'reviews' ? 'active' : ''}`}
+                        onClick={() => handleOptionClick('reviews')}
+                    >
+                        My Reviews
+                    </div>
                 </div>
                 {/* conditional render either restaurant or reviews */}
-                {showMyRestaurant &&
-                    <div className="myprofile-restaurant-overall-container">
+                {showMenu === 'restaurants' &&
+                    <div
+                        className="myprofile-restaurant-overall-container"
+                        onClick={() => handleShowMenu('restaurants')}
+                    >
                         {myResaurantsArr?.map(restaurant => (
                             <div className="myprofile-restaurant-info-main-container" key={restaurant.id}>
                                 <div className="myprofile-img-info-container">
@@ -115,8 +137,11 @@ export default function MyProfilePage () {
                         ))}
                     </div>
                 }
-                {showMyReview &&
-                    <div className="myprofile-restaurant-review-overall-container">
+                {showMenu === 'reviews' &&
+                    <div
+                        className="myprofile-restaurant-review-overall-container"
+                        onClick={() => handleShowMenu('reviews')}
+                    >
                         {myReviewsArr?.map(review => (
                             <div className="myprofile-review-main-container" key={review.id}>
                                 {review.review}

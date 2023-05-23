@@ -38,7 +38,27 @@
 .options-container > div {
     padding: 15px;
     margin-right: 50px;
+    border-radius: 5px;
 }
+
+/* Switch CSS for menu */
+
+.switch-option {
+    cursor: pointer;
+    padding: 10px;
+    /* Define the styles for the inactive state */
+    background-color: white;
+    color: black;
+}
+
+.switch-option.active {
+  /* Define the styles for the active state */
+  background-color: #efefef;
+  color: black;
+}
+
+/* --------------------------- */
+
 
 .myprofile-restaurant-overall-container {
     display: flex;
