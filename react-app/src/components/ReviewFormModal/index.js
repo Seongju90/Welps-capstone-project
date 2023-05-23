@@ -37,7 +37,7 @@ export default function ReviewFormModal () {
 
 
     return (
-        <div className="review-main-container">
+        <div className="review-form-main-container">
             <form className="review-form-container" onSubmit={handleSubmit}>
                 <h1>Write a Review</h1>
                 <div className="review-form-input-container">

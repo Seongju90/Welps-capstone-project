@@ -1,1 +1,96 @@
 /* Restaurant Info Box Container CSS */
+
+/* Main */
+.myprofile-user-main-container{
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: row;
+    height: 190px;
+    position: relative;
+    justify-content: center;
+}
+/* Info */
+.myprofile-user-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: max-content; */
+}
+
+.myprofile-user-info-container > div {
+    padding: 10px;
+    margin-right: 200px;
+}
+
+/* My profile bottom container */
+.myprofile-options-values-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.options-container > div {
+    padding: 15px;
+    margin-right: 50px;
+}
+
+.myprofile-restaurant-overall-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.myprofile-restaurant-review-overall-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* My Restaurant CSS Profile  */
+.myprofile-restaurant-info-main-container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #efefef;
+    padding: 15px;
+}
+
+.myprofile-edit-delete-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.myprofile-edit-delete-container > div {
+    display: flex;
+    align-items: center;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    padding: 2px;
+    margin-right: 2px;
+}
+
+.myprofile-edit-delete-container > div:hover {
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+
+.myprofile-img-info-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.myprofile-restaurant-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 10px;
+}
+
+.myprofile-categories {
+    display: flex;
+    flex-direction: row;
+}

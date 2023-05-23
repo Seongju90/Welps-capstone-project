@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, Restaurant, Review
-from app.forms import RestaurantForm
+from app.models import User, Restaurant, Review, Category
 from .auth_routes import validation_errors_to_error_messages
+from .restaurants_routes import round_to_nearest_half
 
 user_routes = Blueprint('users', __name__)
 
@@ -36,6 +36,31 @@ def my_restaurants(id):
     all_restaurants = Restaurant.query.filter(Restaurant.owner_id == id).all()
     restaurant_dict = [restaurant.to_dict() for restaurant in all_restaurants]
 
+    for restaurant in restaurant_dict:
+
+        reviews = Review.query.filter(Review.restaurant_id == restaurant['id']).all()
+        categories = Category.query \
+            .join(Category.restaurant) \
+            .filter(Restaurant.id == restaurant['id']) \
+            .all()
+
+        review_dict = [ review.to_dict() for review in reviews]
+        categories_dict = [ category.to_dict() for category in categories]
+
+        if (len(review_dict) == 0):
+            avgRating = 0
+        else:
+            totalRatings = 0
+            for review in review_dict:
+                totalRatings += review['rating']
+
+            avgRating = round(totalRatings / len(review_dict), 1)
+            avgRating = round_to_nearest_half(avgRating)
+
+        restaurant["avgRating"] = avgRating
+        restaurant['reviews'] = review_dict
+        restaurant['categories'] = categories_dict
+
     return {"Restaurants": restaurant_dict}
 
 
@@ -47,5 +72,18 @@ def my_reviews(id):
     """
     all_reviews = Review.query.filter(Review.user_id == id).all()
     reviews_dict = [review.to_dict() for review in all_reviews]
+
+    if (len(reviews_dict) == 0):
+        avgRating = 0
+    else:
+    # Calculate avgRating and add it to the review dict
+        totalRatings = 0
+        for review in reviews_dict:
+            totalRatings += review['rating']
+        # calculate the avg, use round to get 1 decimal place, then round again to nearest half
+        avgRating = round(totalRatings / len(reviews_dict), 1)
+        avgRating = round_to_nearest_half(avgRating)
+
+    reviews_dict["avgRating"] = avgRating
 
     return {"Reviews": reviews_dict}
