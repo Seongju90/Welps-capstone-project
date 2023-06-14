@@ -3,8 +3,7 @@ import './ReviewCard.css'
 import profile from '../../icons/profile-user.svg'
 
 export default function ReviewCard ({review}) {
-
-    const userInfo = review?.user_info[0]
+    const userInfo = review?.user_info
 
     return (
         <div className='review-card-main-container'>
@@ -16,7 +15,7 @@ export default function ReviewCard ({review}) {
                     alt={'profile-svg'}
                 />
                 <div>
-                    {`${userInfo.first_name} ${userInfo.last_name}`}
+                    {`${userInfo?.first_name} ${userInfo?.last_name}`}
                 </div>
             </div>
             <div className="user-review-container">

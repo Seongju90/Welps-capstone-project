@@ -33,27 +33,36 @@ export default function EditReviewModal ({reviews}) {
 
 
     return (
-        <div className="edit-review-main-container">
-            <form className="edit-review-form-container" onSubmit={handleSubmit}>
-                <h1>Edit your Review</h1>
+        <div className="review-form-main-container">
+            <form className="review-form-container" onSubmit={handleSubmit}>
+                <h1>Write a Review</h1>
+                <div className="review-form-input-container">
+                    <label>
+                        <input
+                            className="review-input-form"
+                            type="text"
+                            value={review}
+                            onChange={(e) => setReview(e.target.value)}
+                            placeholder='Write your review!'
+                        />
+                    </label>
+                    {errors.review && <div className="errors">{errors.review}</div>}
+                </div>
+                <div className="review-rating-container">
+                    <div style={{marginTop: "1vw"}}>Rating</div>
+                    <label>
+                        <input
+                            className="review-rating-input-form"
+                            type="number"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                            placeholder='Give your rating!'
+                        />
+                    </label>
+                    {errors.rating && <div className="errors">{errors.rating}</div>}
+                </div>
                 <label>
-                    <input
-                        type="text"
-                        value={review}
-                        onChange={(e) => setReview(e.target.value)}
-                        placeholder='Write your review!'
-                    />
-                </label>
-                <label>
-                    <input
-                        type="number"
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        placeholder='Give your rating!'
-                    />
-                </label>
-                <label>
-                    <button type="submit" id="modal-submit">Submit</button>
+                    <button className="review-create-submit-button"type="submit" id="modal-submit">Submit</button>
                 </label>
             </form>
         </div>

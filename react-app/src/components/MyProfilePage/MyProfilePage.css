@@ -115,4 +115,30 @@
     flex-direction: row;
 }
 
+.myprofile-individual-category {
+    padding-right: 1vw;
+}
+
 /* My Review Tab */
+
+.myprofile-img-review-container {
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+}
+
+.myprofile-review-main-container {
+    max-width: 600px;
+    min-width: 600px;
+}
+
+.myprofile-rating-review-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1vw;
+}
+
+.myprofile-user-rating,
+.myprofile-user-review {
+    padding-top: 10px;
+}

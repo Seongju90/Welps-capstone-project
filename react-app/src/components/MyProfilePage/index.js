@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { thunkMyRestaurants, thunkDeleteRestaurants } from '../../store/restaurants';
 import { thunkDeleteReview, thunkMyReviews } from '../../store/reviews';
 import './MyProfilePage.css';
-import OpenModalButton from '../OpenModalButton';
+import EditReviewModalButton from '../EditReviewModalButton';
 import EditRestaurantModal from '../EditRestaurantModal';
 import EditReviewModal from '../EditReviewModal';
 import EditRestaurantModalButton from '../EditRestaurantModalButton';
@@ -23,7 +23,7 @@ export default function MyProfilePage () {
     const currentUser = useSelector(state => state.session?.user)
 
     const myRestaurantsObj = useSelector(state => state?.restaurants)
-    const myResaurantsArr = Object.values(myRestaurantsObj)
+    const myRestaurantsArr = Object.values(myRestaurantsObj)
 
     const myReviewsObj = useSelector(state => state?.reviews)
     const myReviewsArr = Object.values(myReviewsObj)
@@ -34,9 +34,6 @@ export default function MyProfilePage () {
         dispatch(thunkMyReviews(currentUser.id))
     }, [dispatch, currentUser.id])
 
-    console.log(useSelector(state => console.log(state)))
-    console.log('frontend', showMenu)
-    console.log('review tab',myReviewsObj)
     // function to call to change options
     const handleOptionClick = (option) => {
         setSelectedOption(option);
@@ -54,13 +51,11 @@ export default function MyProfilePage () {
 
     const deleteRestaurant = (id) => {
         dispatch(thunkDeleteRestaurants(id))
-        dispatch(thunkMyRestaurants(currentUser.id))
         window.alert("Restaurant has been deleted!")
     }
 
     const deleteReview = (id) => {
         dispatch(thunkDeleteReview(id))
-        dispatch(thunkMyReviews)
         window.alert("Review has been deleted!")
     }
 
@@ -99,7 +94,7 @@ export default function MyProfilePage () {
                     <div
                         className="myprofile-restaurant-overall-container"
                     >
-                        {myResaurantsArr?.map(restaurant => (
+                        {myRestaurantsArr?.map(restaurant => (
                             <div className="myprofile-restaurant-info-main-container" key={restaurant.id}>
                                 <div className="myprofile-img-info-container">
                                     <img
@@ -113,7 +108,7 @@ export default function MyProfilePage () {
                                         <div>{restaurant.name}</div>
                                         <div className="myprofile-categories">
                                         {restaurant.categories?.map(category => (
-                                            <div>{category.type}</div>
+                                            <div className="myprofile-individual-category">{category.type}</div>
                                         ))}
                                         </div>
                                         <div>{`${restaurant?.address} ${restaurant?.city}, ${restaurant?.state} ${restaurant?.zipcode}`}</div>
@@ -147,13 +142,35 @@ export default function MyProfilePage () {
                     >
                         {myReviewsArr?.map(review => (
                             <div className="myprofile-review-main-container" key={review.id}>
-                                {review.review}
-                                <OpenModalButton
-                                    buttonText="Edit"
-                                    modalComponent={<EditReviewModal reviews={review}/>}
-                                    buttonName="edit-review-button"
-                                />
-                                <div onClick={() => deleteReview(review.id)}>{deleteIcon}</div>
+                                <div className="myprofile-img-review-container">
+                                    <img
+                                        height={'64px'}
+                                        width={'64px'}
+                                        src={profile}
+                                        alt={'profile-svg'}
+                                    />
+                                    <div className="myprofile-rating-review-container">
+                                        <div className="myprofile-user-rating">Rating: {review.rating}</div>
+                                        <div className="myprofile-user-review">{review.review}</div>
+                                    </div>
+                                </div>
+                                <div className="myprofile-edit-delete-container">
+                                    <div className="myprofile-info-container">
+                                        <EditReviewModalButton
+                                            buttonText="Edit"
+                                            modalComponent={<EditReviewModal reviews={review}/>}
+                                            buttonName="edit-review-button"
+                                        />
+                                    </div>
+                                    <div className="myprofile-delete-icon">
+                                        <img onClick={() => deleteReview(review.id)}
+                                            height={'16px'}
+                                            width={'16px'}
+                                            src={deleteIcon}
+                                            alt={'myprofile-delete'}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -57,9 +57,9 @@ def my_restaurants(id):
                 avgRating = round(totalRatings / len(review_dict), 1)
                 avgRating = round_to_nearest_half(avgRating)
 
-                restaurant["avgRating"] = avgRating
-                restaurant['reviews'] = review_dict
-                restaurant['categories'] = categories_dict
+        restaurant["avgRating"] = avgRating
+        restaurant['reviews'] = review_dict
+        restaurant['categories'] = categories_dict
 
     return {"Restaurants": restaurant_dict}
 

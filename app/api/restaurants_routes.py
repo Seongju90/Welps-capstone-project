@@ -153,7 +153,12 @@ def edit_my_restaurant(id):
 
 
     restaurant_to_edit = Restaurant.query.get(id)
-
+    print('backend############################', restaurant_to_edit)
+    categories = Category.query \
+        .join(Category.restaurant) \
+        .filter(Restaurant.id == restaurant_to_edit.id) \
+        .all()
+    categories_dict = [ category.to_dict() for category in categories]
 
     if form.validate_on_submit():
 
@@ -173,7 +178,11 @@ def edit_my_restaurant(id):
 
 
         db.session.commit()
-        return restaurant_to_edit.to_dict()
+
+        # Added this portion so that my profile page, renders the categories on update
+        edit_restaurant_dict = restaurant_to_edit.to_dict()
+        edit_restaurant_dict['categories'] = categories_dict
+        return edit_restaurant_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -216,11 +225,11 @@ def all_reviews_of_restaurant(id):
     for review in all_reviews_dict:
 
         # Query for the users for each review and review images for each review
-        user_info = User.query.filter(User.id == review['user_id']).all()
+        user_info = User.query.filter(User.id == review['user_id']).one()
         review_images = ReviewImage.query.filter(ReviewImage.review_id == review['id']).all()
 
         # Turn the python information into dictionaries to manipulate it into each review
-        user_info_dict = [user.to_dict() for user in user_info]
+        user_info_dict = user_info.to_dict()
         review_images_dict = [image.to_dict() for image in review_images]
 
         # Add to the review

@@ -55,7 +55,12 @@ export default function SingleRestaurantPage () {
     const formatNumber = `(${digitsOnly?.slice(0, 3)}) ${digitsOnly?.slice(3, 6)}-${digitsOnly?.slice(6)}`
 
     // Creating hour string
-    const hourString = `${restaurant?.start_hours} - ${restaurant?.end_hours}`
+    let hourString;
+    if (restaurant?.start_hours === 'Open 24 hours') {
+        hourString = "Open 24 hours"
+    } else {
+        hourString = `${restaurant?.start_hours} - ${restaurant?.end_hours}`
+    }
 
     useEffect(() => {
         dispatch(thunkOneRestaurant(restaurantId))
@@ -91,7 +96,7 @@ export default function SingleRestaurantPage () {
                 <div className="bottom-left-main-container">
                     <div className="create-review-container">
                         {/* conditional render the review button for owner */}
-                        {restaurant?.owner_id !== user.id &&
+                        {restaurant?.owner_id !== user?.id &&
                             <div className="star-review-button">
                                 {/* Used a custom modal for this button so clicking star will open modal */}
 					            <OpenReviewModalButton
