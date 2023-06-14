@@ -129,7 +129,7 @@
 
 .myprofile-review-main-container {
     max-width: 600px;
-    min-width: 600px;
+    border-bottom: 1px solid #efefef;
 }
 
 .myprofile-rating-review-container {
@@ -141,4 +141,8 @@
 .myprofile-user-rating,
 .myprofile-user-review {
     padding-top: 10px;
+}
+
+.myprofile-edit-delete-container {
+    padding-bottom: 10px;
 }
