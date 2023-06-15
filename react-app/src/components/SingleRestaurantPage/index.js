@@ -16,8 +16,6 @@ import map from '../../icons/google-map.png'
 export default function SingleRestaurantPage () {
     const dispatch = useDispatch();
 
-    // const [onButtonClick, setOnButtonClick] = useState(false)
-
     // extracting the restaurant id from the url parameter
     const { restaurantId } = useParams()
     const restaurant = useSelector(state => state?.restaurants.singleRestaurant)
@@ -26,9 +24,13 @@ export default function SingleRestaurantPage () {
     const all_reviews_array = Object.values(all_reviews_dict)
     const categoryArr = restaurant?.categories
 
-    // if there is only one category then just put on category on banner
     let category = null;
-    if (categoryArr?.length <= 1) {
+    // when creating restaurant, no option for category so set it as Food.
+    if (categoryArr?.length === 0) {
+        category = 'Food'
+    }
+    // if there is only one category then just put on category on banner
+    if (categoryArr?.length === 1) {
         category = categoryArr[0].type
     } else if (categoryArr?.length > 1) {
         // extract all the categorys, then join it with a comma, so no trailing comma at the end
@@ -95,8 +97,8 @@ export default function SingleRestaurantPage () {
             <div className="bottom-info-main-container">
                 <div className="bottom-left-main-container">
                     <div className="create-review-container">
-                        {/* conditional render the review button for owner */}
-                        {restaurant?.owner_id !== user?.id &&
+                        {/* conditional render the review button for owner, and user must be login to see */}
+                        {((restaurant?.owner_id !== user?.id) && user) &&
                             <div className="star-review-button">
                                 {/* Used a custom modal for this button so clicking star will open modal */}
 					            <OpenReviewModalButton

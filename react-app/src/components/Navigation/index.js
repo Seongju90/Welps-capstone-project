@@ -31,20 +31,16 @@ function Navigation(){
 					<div className="nav-list-all-restaurants" onClick={clickListRestaurants}>
 						Browse the Restaurants
 					</div>
-					<div className="create-restaurant-main-container">
-						<OpenModalButton
-							buttonText="List a Restaurant"
-							modalComponent={<RestaurantFormModal/>}
-							buttonName="nav-create-restaurant-button"
-						/>
-					</div>
-					{/* <div className="create-review-container">
-						<OpenModalButton
-							buttonText="Write a Review"
-							modalComponent={<ReviewFormModal/>}
-							buttonName="create-review-button"
-						/>
-					</div> */}
+					{/* conditionally render the create restaurant */}
+					{ sessionUser &&
+						<div className="create-restaurant-main-container">
+							<OpenModalButton
+								buttonText="List a Restaurant"
+								modalComponent={<RestaurantFormModal/>}
+								buttonName="nav-create-restaurant-button"
+							/>
+						</div>
+					}
 			</div>
 			{!sessionUser ?
 				<div className="login-signup-container">

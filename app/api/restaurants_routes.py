@@ -153,7 +153,7 @@ def edit_my_restaurant(id):
 
 
     restaurant_to_edit = Restaurant.query.get(id)
-    print('backend############################', restaurant_to_edit)
+
     categories = Category.query \
         .join(Category.restaurant) \
         .filter(Restaurant.id == restaurant_to_edit.id) \
@@ -176,12 +176,12 @@ def edit_my_restaurant(id):
         restaurant_to_edit.start_hours=form.data["start_hours"]
         restaurant_to_edit.end_hours=form.data["end_hours"]
 
-
-        db.session.commit()
-
         # Added this portion so that my profile page, renders the categories on update
         edit_restaurant_dict = restaurant_to_edit.to_dict()
         edit_restaurant_dict['categories'] = categories_dict
+
+        db.session.commit()
+
         return edit_restaurant_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -249,6 +249,10 @@ def create_review(id):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    # Query for the user info
+    user_info = User.query.get(current_user.id)
+    user_info_dict = user_info.to_dict()
+
     if form.validate_on_submit():
 
         newReview = Review(
@@ -260,8 +264,13 @@ def create_review(id):
         )
 
         db.session.add(newReview)
+
+        # Adding the user info when creating a review, so that it renders with the user info instead of undefined
+        new_review_dict = newReview.to_dict()
+        new_review_dict['user_info'] = user_info_dict
+
         db.session.commit()
 
-        return newReview.to_dict()
+        return new_review_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
