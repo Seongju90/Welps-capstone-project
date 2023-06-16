@@ -1,0 +1,20 @@
+.home-banner-container {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    width: 100%;
+}
+
+.banner-img {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.splash-review-container {
+    display: flex;
+}
+
+.splash-review-container {
+    display: flex;
+}

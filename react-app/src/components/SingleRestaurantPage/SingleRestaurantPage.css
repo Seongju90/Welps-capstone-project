@@ -1,0 +1,184 @@
+/* Main container for Single Restaurant */
+.single-card-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Img Banner */
+.banner-container {
+    display: flex;
+    justify-content: center;
+    /* to get the overlay at the bottom */
+    align-items: flex-end;
+}
+
+.single-img-banner {
+    display: flex;
+    flex-direction: row;
+    height: 425px;
+    /* using filter property to adjust brightness so we can see text easier */
+    filter: brightness(70%);
+}
+
+/* Info Overlay */
+.info-overlay {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px;
+    min-width: 960px;
+}
+
+.single-restaurant-name {
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.single-restaurant-ratings {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.single-restaurant-price-categories {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.single-restaurant-hours {
+    color:white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.see-photo-button {
+    color:white;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 1vw;
+}
+
+
+/* Bottom Info Container */
+.bottom-info-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+    margin-top: 2em;
+    max-width: 1100px;
+}
+
+
+.bottom-right-main-container {
+    /* position: relative; */
+    width: 25%;
+    height: fit-content;
+}
+
+.bottom-left-main-container {
+    width: 70%;
+    min-width: 511px;
+}
+
+.review-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+/* Create review container */
+.star-review-button {
+    display: flex;
+    flex-direction: row;
+    max-width: 150px;
+    align-items: center;
+    background-color: red;
+    border-radius: 4px;
+    margin-bottom: 1vw;
+    justify-content: center;
+    color: white;
+    padding: 10px;
+}
+
+.star-review-button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.single-index-create-review-button {
+    padding-left: 5px;
+}
+
+/* Phone and Address Container */
+.phone-address-box{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ebebeb;
+    padding: 10px;
+    border-radius: 4px;
+    /* position: sticky; */
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.phone-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.address-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 10px;
+    color: rgba(110,112,114,1);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Location and Hours Container */
+.location-hour-container {
+    display: flex;
+    flex-direction: row;
+    min-width: 426px;
+}
+
+.location-map {
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1vw;
+    padding-top: 1vw;
+}
+
+.hours-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 27%;
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1vw;
+    border-top: 1px solid lightgrey;
+    padding-top: 1vw;
+}
+
+.sub-hours-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 200px;
+}

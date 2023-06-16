@@ -1,17 +1,147 @@
+/* Profile Dropdown */
 .profile-dropdown {
   position: absolute;
   display: flex;
   flex-direction: column;
-  right: 1vw;
+  right: 3.5vw;
+  top: 85px;
+  z-index: 1;
+  border: 1px solid lightgrey;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  border-radius: 5px;
 }
 
 .hidden {
   display: none;
 }
 
+.profile-dropdown > div {
+  margin: 1vw;
+  padding: 10px;
+}
+
+.profile-dropdown > div:hover {
+  background-color: #eeeeef;
+  border-radius: 4px;
+}
+
+/* Navigation - container */
+
 .nav-bar-main-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 2%;
+}
+
+.home-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right-nav-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  align-items: center
+}
+
+
+/* Login - Signup - Container */
+.login-signup-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-splash-button {
+  padding: 1vw;
+  padding: 8px 1vw 8px 1vw;
+  border: 2px solid white;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: rgb(107, 99, 99);
+}
+
+
+.signup-splash-button {
+  margin-left: 10px;
+  color: white;
+  background-color: #d42828;
+  border-radius: 5px;
+  padding: 8px 1vw 8px 1vw;
+  cursor: pointer;
+}
+
+/* Login and All Restaurant buttons when not on splash page */
+.login-button-nonsplash {
+  padding: 8px 1vw 8px 1vw;
+  border: 1px solid lightgrey;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.login-button-nonsplash:hover {
+  background-color: rgb(240, 237, 237)
+}
+
+.nav-list-all-restaurants-nonsplash,
+.nav-create-restaurant-button-nonsplash {
+  color:black;
+  margin-right: 10px;
+  border: 1px solid lightgrey;
+  padding: 8px 1vw 8px 1vw;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.nav-list-all-restaurants-nonsplash:hover,
+.nav-create-restaurant-button-nonsplash:hover {
+  background-color: rgb(240, 237, 237)
+}
+
+/* Create Restaurant - Create Review Container */
+.create-main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-create-restaurant-button {
+  color:white;
+  margin-right: 10px;
+  padding: 1vw;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.nav-list-all-restaurants {
+  color:white;
+  margin-right: 10px;
+  padding: 1vw;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.nav-list-all-restaurants:hover,
+.nav-create-restaurant-button:hover {
+  background-color: rgb(107, 99, 99);
+  border-radius: 4px;
+}
+
+/* Profile Button CSS */
+.nav-profile-user-img {
+  width: 30px;
+  height: 30px;
+  padding: 1vw;
+  cursor: pointer;
 }

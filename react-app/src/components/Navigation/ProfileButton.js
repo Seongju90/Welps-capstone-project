@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import { useHistory, useLocation } from "react-router-dom";
 
-import { login } from "../../store/session"
+
+import profile2 from "../../icons/profile-user2.svg"
+import profile1 from "../../icons/profile-user.svg"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -34,48 +37,38 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push(`/`)
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const closeMenu = () => setShowMenu(false);
-
-  const demoUser = async (e) => {
-    await dispatch(login('demo@aa.io', 'password'));
-    setShowMenu(false);
+  const clickMyProfile = (e) => {
+    e.preventDefault();
+    history.push(`/users/${user.id}/myprofile`)
+    setShowMenu(false)
   }
+
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      {location.pathname === "/" ?
+          <img
+            className="nav-profile-user-img"
+            src={profile1}
+            alt={"profile-svg-2"}
+            onClick={openMenu}
+          /> :
+          <img
+          className="nav-profile-user-img"
+          src={profile2}
+          alt={"profile-svg-2"}
+          onClick={openMenu}
+        />
+      }
       <div className={ulClassName} ref={ulRef}>
-        {user ? (
-          <>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <div>
-              <button onClick={handleLogout}>Log Out</button>
-            </div>
-          </>
-        ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-            <div onClick={demoUser}>
-              Demo user
-            </div>
-          </>
-        )}
+          <div className="drop-down-name">{user.username}</div>
+          <div className="drop-down-email">{user.email}</div>
+          <div className="drop-down-myprofile"onClick={clickMyProfile}>My Profile</div>
+          <div className="drop-down-logout"onClick={handleLogout}>Log Out</div>
       </div>
     </>
   );

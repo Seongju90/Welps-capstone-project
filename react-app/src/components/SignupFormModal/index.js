@@ -9,6 +9,8 @@ function SignupFormModal() {
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
@@ -16,67 +18,83 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+
+			const signUpData = {
+				'email': email,
+				'username': username,
+				'password': password,
+				'first_name': firstName,
+				'last_name': lastName,
+			}
+
+			const data = await dispatch(signUp(signUpData))
+
 			if (data) {
 				setErrors(data);
 			} else {
 				closeModal();
 			}
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			setErrors({
+				'password': "Confirm Password field must be the same as the Password field",
+			});
 		}
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit}>
-				<ul>
-					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
-					))}
-				</ul>
-				<label>
-					Email
+		<div className="signup-main-container">
+			<div className="signup-heading-text">Sign Up with us!</div>
+			<form className="signup-form-container"onSubmit={handleSubmit}>
+				<input
+					type="text"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+					placeholder="Email"
+				/>
+				{errors.email && <div className="signup-input-errors">{errors.email}</div>}
+				<input
+					type="text"
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					required
+					placeholder="Username"
+				/>
+				{errors.username && <div className="signup-input-errors">{errors.username}</div>}
+				<div className="first-last-name-container">
 					<input
 						type="text"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
 						required
+						placeholder="First Name"
 					/>
-				</label>
-				<label>
-					Username
 					<input
 						type="text"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
 						required
+						placeholder="Last Name"
 					/>
-				</label>
-				<label>
-					Password
-					<input
-						type="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<label>
-					Confirm Password
-					<input
-						type="password"
-						value={confirmPassword}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						required
-					/>
-				</label>
-				<button type="submit">Sign Up</button>
+				</div>
+				<input
+					type="password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					required
+					placeholder="Password"
+				/>
+				<input
+					type="password"
+					value={confirmPassword}
+					onChange={(e) => setConfirmPassword(e.target.value)}
+					required
+					placeholder="Confirm Password"
+				/>
+				{errors.password && <div className="signup-input-errors">{errors.password}</div>}
+				<button className="signup-modal-button" type="submit">Sign Up</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

@@ -4,9 +4,11 @@ import { thunkAllRestaurants } from '../../store/restaurants';
 import RestaurantCard from '../RestaurantCard';
 import './RestaurantIndex.css';
 
+import map from '../../icons/google-map.png'
+
 export default function RestaurantsIndex() {
     const dispatch = useDispatch()
-    const restaurantsObj = useSelector(state => state.restaurants)
+    const restaurantsObj = useSelector(state => state?.restaurants)
     const restaurantsArray = Object.values(restaurantsObj)
 
 
@@ -25,7 +27,7 @@ export default function RestaurantsIndex() {
                 ))}
             </div>
             <div className="google-map-container">
-                Google Map
+                <img className="index-map-img" src={map} alt={"restaurant-index-map"}/>
             </div>
         </div>
     )

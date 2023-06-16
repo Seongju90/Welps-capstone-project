@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { thunkCreateRestaurant } from "../../store/restaurants";
 import { useModal } from "../../context/Modal";
 import "./RestaurantForm.css"
-import { ReactComponent as Cityscape } from '../../assets/cityscape_300x233_v2.yji-deccc3d10e15b4494be1.svg';
-
 
 export default function RestaurantFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const { closeModal } = useModal();
 
 
@@ -16,19 +16,19 @@ export default function RestaurantFormModal() {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [country, setCountry] = useState("")
-    const [zipcode, setZipcode] = useState()
+    const [zipcode, setZipcode] = useState("")
     const [price, setPrice] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [previewImage, setPreviewImage] = useState("")
     const [startHours, setStartHours] = useState("")
     const [endHours, setEndHours] = useState("")
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const data = await dispatch(thunkCreateRestaurant({
+        const formData = {
             'name': name,
             'address': address,
             'city': city,
@@ -40,72 +40,91 @@ export default function RestaurantFormModal() {
             'preview_image': previewImage,
             'start_hours': startHours,
             'end_hours': endHours
-        }))
+        }
 
-        if(data) {
-            console.log(data)
-            setErrors(data.errors)
-        } else {
-            // if data is created properly, it returns null which close Modal.
+        const newRestaurant = await dispatch(thunkCreateRestaurant(formData))
+
+        if (newRestaurant.id) {
             closeModal()
+            history.push(`/restaurants/${newRestaurant.id}`)
+        } else if (newRestaurant){
+            setErrors(newRestaurant.errors)
         }
     }
-
 
     return (
         <div className="create-form-main-container">
             <form className="create-restaurant-container" onSubmit={handleSubmit}>
-                <h2>List a Restaurant</h2>
-                <label>
+                <h2>Fill out your Restaurant Details</h2>
+
+                <div className="restaurant-form-name">
+                    <label>Restaurant Name:</label>
+                    <input
+                        className="input-name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Name"
+                    />
+                </div>
+                {errors.name && <div className="error">{errors.name}</div>}
+                <div className="restaurant-form-address">
+                    <div className="address-container">
+                        <label>Address:</label>
                         <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Name"
-                        />
-                </label>
-                <label>
-                        <input
+                            className="input-address"
                             type="text"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             placeholder="Address"
                         />
-                </label>
-                <label>
+                    </div>
+                    {errors.address && <div className="error">{errors.address}</div>}
+                    <div className="city-state-container">
                         <input
+                            className="input-city"
                             type="text"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             placeholder="City"
                         />
-                </label>
-                <label>
                         <input
+                            className="input-state"
                             type="text"
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             placeholder="State"
-                        />
-                </label>
-                <label>
+                            />
+                    </div>
+                    <div className="city-state">
+                        {errors.city && <div className="error">{errors.city}</div>}
+                        {errors.state && <div className="error">{errors.state}</div>}
+                    </div>
+                    <div className="country-zipcode-container">
                         <input
+                            className="input-country"
                             type="text"
                             value={country}
                             onChange={(e) => setCountry(e.target.value)}
                             placeholder="Country"
                         />
-                </label>
-                <label>
                         <input
+                            className="input-zipcode"
                             type="text"
                             value={zipcode}
                             onChange={(e) => setZipcode(e.target.value)}
                             placeholder="Zipcode"
                         />
-                </label>
-                <label>
+                    </div>
+                    <div className="country-zipcode">
+                        {errors.country && <div className="error">{errors.country}</div>}
+                        {errors.zipcode && <div className="error">{errors.zipcode}</div>}
+                    </div>
+                </div>
+                <div className="restaurant-form-price">
+                    <label>Price</label>
                     <select
+                        className="input-price"
                         onChange={(e) => setPrice(e.target.value)}
                     >
                         <option value="">--Please choose an option--</option>
@@ -114,46 +133,59 @@ export default function RestaurantFormModal() {
                         <option value="$$$">$$$</option>
                         <option value="$$$$">$$$$</option>
                     </select>
-                </label>
-                <label>
+                    {errors.price && <div className="error">{errors.price}</div>}
+                </div>
+                <div className="restaurant-form-phone">
+                    <label>Phone Number:</label>
                         <input
+                            className="input-phone"
                             type="text"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="Phone Number"
                         />
-                </label>
-                <label>
+                    {errors.phone_number && <div className="error">{errors.phone_number}</div>}
+                </div>
+                <div className="restaurant-form-preview">
+                    <label>Preview Image Url:</label>
+                    <input
+                        className="input-preview"
+                        type="text"
+                        value={previewImage}
+                        onChange={(e) => setPreviewImage(e.target.value)}
+                        placeholder="Preview Image Url"
+                    />
+                    {errors.preview_image && <div className="error">{errors.preview_image}</div>}
+                </div>
+                <div className="start-end-hour-container">
+                    <div className="restaurant-form-start-hour">
+                        <label>Starting Hour:</label>
                         <input
-                            type="text"
-                            value={previewImage}
-                            onChange={(e) => setPreviewImage(e.target.value)}
-                            placeholder="Preview Image Url"
-                        />
-                </label>
-                <label>
-                        <input
+                            className="input-start-hour"
                             type="text"
                             value={startHours}
                             onChange={(e) => setStartHours(e.target.value)}
-                            placeholder="Starting Hours"
+                            placeholder="00:00 AM"
                         />
-                </label>
-                <label>
+                    </div>
+                    <div className="restaurant-form-end-hour">
+                        <label className="end-label">Ending Hour:</label>
                         <input
+                            className="input-end-hour"
                             type="text"
                             value={endHours}
                             onChange={(e) => setEndHours(e.target.value)}
-                            placeholder="Ending Hours"
+                            placeholder="00:00 PM"
                         />
-                </label>
-                <label>
-                    <button type="submit" id="modal-submit">Create</button>
-                </label>
+                    </div>
+                </div>
+                <div className="start-end-hours">
+                    {errors.start_hours && <div className="error">{errors.start_hours}</div>}
+                    {errors.end_hours && <div className="error">{errors.end_hours}</div>}
+                    {errors.validate_start_hour && <div className="error">{errors.validate_start_hour}</div>}
+                </div>
+                <button className="create-submit-button" type="submit" id="modal-submit">Submit</button>
             </form>
-            <div className="form-picture-container">
-                <Cityscape/>
-            </div>
         </div>
     )
 }
