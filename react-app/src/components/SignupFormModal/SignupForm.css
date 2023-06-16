@@ -31,6 +31,9 @@
     margin: 10px;
 }
 
+.signup-form-container > .signup-input-errors {
+    margin-left: 5px;
+}
 
 /* -------------- Sign Up Button --------------*/
 

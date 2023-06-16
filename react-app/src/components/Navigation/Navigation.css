@@ -56,15 +56,22 @@
   flex-direction: row;
 }
 
-.login-button {
+.login-splash-button {
   padding: 1vw;
   padding: 8px 1vw 8px 1vw;
-  border: 1px solid black;
+  border: 2px solid white;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
-.signup-button {
+.login-button:hover {
+  background-color: rgb(107, 99, 99);
+}
+
+
+.signup-splash-button {
   margin-left: 10px;
   color: white;
   background-color: #d42828;
@@ -73,6 +80,35 @@
   cursor: pointer;
 }
 
+/* Login and All Restaurant buttons when not on splash page */
+.login-button-nonsplash {
+  padding: 8px 1vw 8px 1vw;
+  border: 1px solid lightgrey;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.login-button-nonsplash:hover {
+  background-color: rgb(240, 237, 237)
+}
+
+.nav-list-all-restaurants-nonsplash,
+.nav-create-restaurant-button-nonsplash {
+  color:black;
+  margin-right: 10px;
+  border: 1px solid lightgrey;
+  padding: 8px 1vw 8px 1vw;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.nav-list-all-restaurants-nonsplash:hover,
+.nav-create-restaurant-button-nonsplash:hover {
+  background-color: rgb(240, 237, 237)
+}
 
 /* Create Restaurant - Create Review Container */
 .create-main-container {
@@ -81,23 +117,24 @@
 }
 
 .nav-create-restaurant-button {
-  padding: 1vw;
-  cursor: pointer;
-}
-
-/* .create-review-button {
-  padding: 1vw;
-} */
-
-.nav-list-all-restaurants {
+  color:white;
   margin-right: 10px;
   padding: 1vw;
   cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.nav-list-all-restaurants {
+  color:white;
+  margin-right: 10px;
+  padding: 1vw;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .nav-list-all-restaurants:hover,
 .nav-create-restaurant-button:hover {
-  background-color: #eeeeef;
+  background-color: rgb(107, 99, 99);
   border-radius: 4px;
 }
 

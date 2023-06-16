@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
 
 import profile2 from "../../icons/profile-user2.svg"
+import profile1 from "../../icons/profile-user.svg"
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
+
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -46,7 +50,20 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <img className="nav-profile-user-img" src={profile2} alt={"profile-svg-2"} onClick={openMenu}/>
+      {location.pathname === "/" ?
+          <img
+            className="nav-profile-user-img"
+            src={profile1}
+            alt={"profile-svg-2"}
+            onClick={openMenu}
+          /> :
+          <img
+          className="nav-profile-user-img"
+          src={profile2}
+          alt={"profile-svg-2"}
+          onClick={openMenu}
+        />
+      }
       <div className={ulClassName} ref={ulRef}>
           <div className="drop-down-name">{user.username}</div>
           <div className="drop-down-email">{user.email}</div>

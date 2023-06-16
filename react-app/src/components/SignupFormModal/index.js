@@ -35,13 +35,12 @@ function SignupFormModal() {
 				closeModal();
 			}
 		} else {
-			setErrors([
-				"Confirm Password field must be the same as the Password field",
-			]);
+			setErrors({
+				'password': "Confirm Password field must be the same as the Password field",
+			});
 		}
 	};
 
-	console.log(errors)
 	return (
 		<div className="signup-main-container">
 			<div className="signup-heading-text">Sign Up with us!</div>
@@ -53,7 +52,7 @@ function SignupFormModal() {
 					required
 					placeholder="Email"
 				/>
-				{errors.email && <div>{errors.email}</div>}
+				{errors.email && <div className="signup-input-errors">{errors.email}</div>}
 				<input
 					type="text"
 					value={username}
@@ -61,7 +60,7 @@ function SignupFormModal() {
 					required
 					placeholder="Username"
 				/>
-				{errors.username && <div>{errors.username}</div>}
+				{errors.username && <div className="signup-input-errors">{errors.username}</div>}
 				<div className="first-last-name-container">
 					<input
 						type="text"
@@ -92,6 +91,7 @@ function SignupFormModal() {
 					required
 					placeholder="Confirm Password"
 				/>
+				{errors.password && <div className="signup-input-errors">{errors.password}</div>}
 				<button className="signup-modal-button" type="submit">Sign Up</button>
 			</form>
 		</div>
