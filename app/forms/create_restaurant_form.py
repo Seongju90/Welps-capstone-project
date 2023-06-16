@@ -19,8 +19,6 @@ def validate_start_hour(form, field):
     # field is object being validated, *where is the validator being placed, in which field*
     end_hour_str = field.data
 
-
-
     if len(start_hour_str) == 0 :
         raise ValidationError(message='Please input a starting hour for comparison')
 

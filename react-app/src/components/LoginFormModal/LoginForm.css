@@ -1,0 +1,100 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------Login Text Styling-------------- */
+.login-text {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: #d42828;;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+/* --------------OR Divider Styling-------------- */
+
+.login-divider {
+    width: 100%;
+}
+
+/* CSS style for pseudo-elements :before and :after span elements with class or */
+span.or:before,
+span.or:after {
+  background-color: #ccc;
+  display: inline-block;
+  position: relative;
+  /* Content to an empty string, this property is required for pseudo elements */
+  content: "";
+  /* Actual creation of a string */
+  height: 1px;
+  width: 50%;
+  vertical-align: middle;
+}
+
+/* Styling of the lines to be centered */
+span.or {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(88, 88, 88);
+    margin: 5px;
+}
+
+/* Addition of margins separately before and after or */
+span.or:before {
+    margin-right: 10px;
+}
+
+span.or:after {
+    margin-left: 10px;
+}
+
+/* --------------Demo Button Styling--------------*/
+.demo-user-button {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+    color: grey;
+    cursor: pointer;
+}
+
+/* --------------Email and Password--------------*/
+.login-input-email {
+    margin: 10px 10px 0px 10px;
+    padding: 10px;
+}
+
+.login-input-password {
+    margin: 10px 10px 0 10px;
+    padding: 10px;
+}
+
+/* --------------Login Button Styling--------------*/
+.login-form-button {
+    display: flex;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+    padding: 10px;
+    background-color: #d42828;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border:1px solid #d42828;
+}
+
+/* --------------Login Error Styling--------------*/
+.login-error-text {
+    margin-left: 10px;
+}

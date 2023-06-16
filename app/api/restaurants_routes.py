@@ -39,6 +39,7 @@ def all_restaurants():
         review_dict = [ review.to_dict() for review in reviews]
         images_dict = [ image.to_dict() for image in images]
         categories_dict = [ category.to_dict() for category in categories]
+
         # if there are no reviews avgRating is 0, otherwise calculate avgRating
         if (len(review_dict) == 0):
             avgRating = 0

@@ -58,10 +58,19 @@
 
 .login-button {
   padding: 1vw;
+  padding: 8px 1vw 8px 1vw;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .signup-button {
-  padding: 1vw;
+  margin-left: 10px;
+  color: white;
+  background-color: #d42828;
+  border-radius: 5px;
+  padding: 8px 1vw 8px 1vw;
+  cursor: pointer;
 }
 
 
@@ -81,6 +90,7 @@
 } */
 
 .nav-list-all-restaurants {
+  margin-right: 10px;
   padding: 1vw;
   cursor: pointer;
 }
@@ -89,7 +99,6 @@
 .nav-create-restaurant-button:hover {
   background-color: #eeeeef;
   border-radius: 4px;
-  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
 }
 
 /* Profile Button CSS */
