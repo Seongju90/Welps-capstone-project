@@ -66,6 +66,19 @@ Visit [Welp](https://welp-o2rq.onrender.com)
     ```
 
 # Features
+## Splash Page, Login, Signup
+<img src="assets/splashpage.png" alt="splash" width="400px" height="400px"/>
+<img src="assets/login.png" alt="login" width="400px" height="400px"/>
+<img src="assets/signup.png" alt="signup" width="400px" height="400px"/>
+
+## Restaurant CRUD
+<img src="assets/allrestaurants.png" alt="allrestaurants" width="400px" height="400px"/>
+<img src="assets/singlerestaurant.png" alt="singlerestaurant" width="400px" height="400px"/>
+<img src="assets/createrestaurant.png" alt="createrestaurant" width="400px" height="400px"/>
+<img src="assets/myprofile.png" alt="editdeleterestaurant" width="400px" height="400px"/>
+
+## Review Create, other review features on Restaurant CRUD
+<img src="assets/createreview.png" alt="create review" width="400px" height="400px"/>
 
 ## Restaurants
 * Users can create a restaurant
