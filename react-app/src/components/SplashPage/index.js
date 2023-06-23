@@ -5,6 +5,8 @@ import { thunkSplashReview } from '../../store/reviews'
 import SplashReviewCard from '../SplashReviewCard'
 
 import koreanFoodBanner from "../../assets/DSCF7368.jpg"
+import githubIcon from "../../icons/github-com.svg"
+
 
 function SplashPage() {
     const dispatch = useDispatch()
@@ -13,7 +15,6 @@ function SplashPage() {
     const splashReviews = useSelector(state => state?.reviews)
     const splashReviewsArray = Object.values(splashReviews)
 
-    console.log(splashReviewsArray)
     useEffect(() => {
         dispatch(thunkSplashReview())
     },[dispatch])
@@ -37,6 +38,26 @@ function SplashPage() {
                     ))}
                 </div>
             </div>
+            <footer className="footer-main-container">
+                <div className="footer-about-container">
+                    <div className="footer-about-text">About</div>
+                    <a className="footer-about-link-text" href="https://github.com/Seongju90/Welps-capstone-project">About Welp</a>
+                </div>
+                <div className="footer-developer-container">
+                    <div className="developer-text">Developer</div>
+                    <div className="developer-info-sub-container">
+                        <a className="github-icon" href="https://github.com/Seongju90">
+                            <img
+                                src={githubIcon}
+                                alt="github-icon"
+                                width="14px"
+                                height="14px"
+                            />
+                        </a>
+                        <div className="developer-name">Philip Lee</div>
+                    </div>
+                </div>
+            </footer>
         </>
     )
 }
