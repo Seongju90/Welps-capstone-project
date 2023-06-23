@@ -63,7 +63,7 @@ class RestaurantForm(FlaskForm):
         "State",
         validators = [
             DataRequired("State is required"),
-            Regexp(r'^[A-Z]{2}\s*$', message='State must be two consecutive capital letters'),
+            Regexp(r'^[A-Z]{2}\s*$', message='State must be two consecutive capital letters, ex: CA'),
             # r indicates raw string, because \ , \n can be use for new lines or escape characters
             # and in regex we use that, so it treats are literal characters, rather than escape character
             # custom_regex_validator(r'^[A-Z]{2}$', 'State must be two consecutive capital letters')

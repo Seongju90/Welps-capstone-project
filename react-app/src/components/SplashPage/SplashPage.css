@@ -11,10 +11,68 @@
     object-fit: cover;
 }
 
-.splash-review-container {
+.splash-review-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 400px;
+}
+
+.splash-review-sub-container {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 6em 0 6em;
+}
+
+.splash-review-card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.splash-review-header {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* ---------- footer container ---------- */
+.footer-main-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f7f7f7;
+    position: relative;
+    top: 400px;
+    height: 200px;
+}
+
+.developer-info-sub-container {
     display: flex;
 }
 
-.splash-review-container {
-    display: flex;
+.developer-name {
+    padding-left: 5px;
+}
+
+.footer-developer-container,
+.footer-about-container {
+    padding-top: 10px;
+}
+
+.footer-about-text,
+.developer-text {
+    font-weight: bold
+}
+
+.footer-about-text {
+    padding-bottom: 10px;
+}
+.developer-info-sub-container {
+    padding-top: 10px;
+}
+
+/* this get rids of underline from a tags */
+a {
+    text-decoration: none;
 }

@@ -6,7 +6,7 @@ const MY_REVIEWS = "reviews/MY_REVIEWS"
 const CREATE_REVIEWS = "reviews/CREATE_REVIEWS"
 const UPDATE_REVIEWS = "reviews/UPDATE_REVIEWS"
 const DELETE_REVIEWS = "reviews/DELETE_REVIEWS"
-
+const SPLASH_REVIEWS = "reviews/SPLASH_REVIEWS"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 
@@ -42,6 +42,13 @@ const actionEditReview = (payload) => {
 const actionDeleteReview = (payload) => {
     return {
         type: DELETE_REVIEWS,
+        payload
+    }
+}
+
+const actionSplashReview = (payload) => {
+    return {
+        type: SPLASH_REVIEWS,
         payload
     }
 }
@@ -140,6 +147,25 @@ export const thunkDeleteReview = (id) => async (dispatch) => {
 
     else return { errors: ["An error occurred. Please try again."] }
 }
+
+export const thunkSplashReview = () => async (dispatch) => {
+    const response = await fetch(`/api/reviews`)
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(actionSplashReview(data))
+        return response
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json()
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
+
 /*---------------------- REVIEWS REDUCER ----------------------*/
 const initialState = {}
 const reviewsReducer = (state = initialState, action) => {
@@ -159,6 +185,9 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         case DELETE_REVIEWS:
             delete newState[action.payload]
+            return newState;
+        case SPLASH_REVIEWS:
+            newState = normalizeArray(action.payload.Splash_Reviews)
             return newState;
         default:
             return state;

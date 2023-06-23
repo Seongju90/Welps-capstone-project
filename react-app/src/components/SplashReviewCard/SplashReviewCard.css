@@ -1,0 +1,58 @@
+/* ---------- Containers ----------- */
+.splash-individual-card-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    padding-right: 25px;
+    min-height: 300px;
+    max-width: 360px;
+    border: 1px solid lightgrey;
+    justify-content: space-evenly;
+}
+
+.splash-page-user-info-container {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.splash-restaurant-info-rating-review-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Subcontainers ----------- */
+.splash-user-name-comment {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.splash-comment {
+    padding-top: 3px;
+    font-size: 13px;
+    font: lightgrey;
+}
+
+.splash-review-image {
+    height: 90px;
+    object-fit: cover;
+}
+
+.splash-restaurant-name {
+    padding-top: 10px;
+    font-size: 13px;
+    color: #1a93c3;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.splash-review-rating {
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.splash-actual-review {
+    padding-top: 10px;
+    font-size: 13px;
+}
