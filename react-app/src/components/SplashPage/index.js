@@ -6,7 +6,7 @@ import SplashReviewCard from '../SplashReviewCard'
 
 import koreanFoodBanner from "../../assets/DSCF7368.jpg"
 import githubIcon from "../../icons/github-com.svg"
-
+import linkedInIcon from "../../icons/linkedin-svgrepo-com.svg"
 
 function SplashPage() {
     const dispatch = useDispatch()
@@ -52,6 +52,15 @@ function SplashPage() {
                                 alt="github-icon"
                                 width="14px"
                                 height="14px"
+                            />
+                        </a>
+                        <a classname="linkedin-icon" href="https://www.linkedin.com/in/lee-philip-31902124a/">
+                            <img
+                                src={linkedInIcon}
+                                alt="linkedin-icon"
+                                width="14px"
+                                height="14px"
+                                style={{paddingLeft:'5px'}}
                             />
                         </a>
                         <div className="developer-name">Philip Lee</div>
