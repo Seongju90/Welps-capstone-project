@@ -48,7 +48,7 @@ function SplashReviewCard({reviews}) {
             <img
                 className="splash-review-image"
                 src={reviewImg}
-                alt="splash-review-image"
+                alt="splash-review"
             />
             <div className="splash-restaurant-info-rating-review-container">
                 <div className="splash-restaurant-name" onClick={navigateToSingleRestaurant}>
