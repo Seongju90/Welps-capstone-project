@@ -13,14 +13,14 @@ function SplashReviewCard({reviews}) {
     // if review has no img, put broken img icon otherwise, choose one from the array
     let reviewImg;
 
-    if (!reviewImageArr.length) {
+    if (!reviewImageArr?.length) {
         reviewImg = brokenImg
     } else {
         // math.random * array length scale the random decimal number to the length of the array
         // inclusive of 0 and exclusive the length of array, this ensures will fall in valid range of array
         // math.floor to round it to a whole number
-        const randomIndex = Math.floor(Math.random() * reviewImageArr.length)
-        reviewImg = reviewImageArr[randomIndex].url
+        const randomIndex = Math.floor(Math.random() * reviewImageArr?.length)
+        reviewImg = reviewImageArr[randomIndex]?.url
     }
 
     const navigateToSingleRestaurant = () => {
@@ -48,7 +48,7 @@ function SplashReviewCard({reviews}) {
             <img
                 className="splash-review-image"
                 src={reviewImg}
-                alt="splash-review-image"
+                alt="splash-review"
             />
             <div className="splash-restaurant-info-rating-review-container">
                 <div className="splash-restaurant-name" onClick={navigateToSingleRestaurant}>

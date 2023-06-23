@@ -108,6 +108,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin-left: 10px;
+    max-width: 500px;
 }
 
 .myprofile-categories {
@@ -128,7 +129,7 @@
 }
 
 .myprofile-review-main-container {
-    max-width: 600px;
+    max-width: 500px;
     border-bottom: 1px solid #efefef;
 }
 

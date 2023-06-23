@@ -9,7 +9,8 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
 
-import cloudLogo from '../../icons/red-cloud-logo.svg'
+import redCloudLogo from '../../icons/red-cloud-logo.svg'
+import whiteCloudLogo from '../../icons/white-cloud-svg.svg'
 
 function Navigation(){
 	const sessionUser = useSelector(state => state.session.user);
@@ -19,18 +20,24 @@ function Navigation(){
 	const [loginStyling, setLoginStyling] = useState('login-splash-button')
 	const [allRestaurantStyling, setAllRestaurantStyling] = useState('nav-list-all-restaurants')
 	const [createRestaurantStyling, setCreateRestaurantStyling] = useState('nav-create-restaurant-button')
+	const [logoColor, setLogoColor] = useState(whiteCloudLogo)
+	const [textColor, setTextColor] = useState('app-text-heading-splash')
 
 	useEffect(() => {
 		if (location.pathname === '/') {
 			setLoginStyling('login-splash-button')
 			setAllRestaurantStyling('nav-list-all-restaurants')
 			setCreateRestaurantStyling('nav-create-restaurant-button')
+			setLogoColor(whiteCloudLogo)
+			setTextColor('app-text-heading-splash')
 		} else {
 			setLoginStyling('login-button-nonsplash')
 			setAllRestaurantStyling('nav-list-all-restaurants-nonsplash')
 			setCreateRestaurantStyling('nav-create-restaurant-button-nonsplash')
+			setLogoColor(redCloudLogo)
+			setTextColor('app-text-heading-nonsplash')
 		}
-	})
+	},[setLoginStyling, setAllRestaurantStyling, setCreateRestaurantStyling, setLogoColor, setTextColor, location.pathname])
 
 	const clickListRestaurants = (e) => {
 		e.preventDefault();
@@ -45,11 +52,13 @@ function Navigation(){
 	return (
 		<div className="nav-bar-main-container">
 			<div className="home-button-container">
+				<span className={textColor} onClick={clickHome}>Welp</span>
 				<img
 					onClick={clickHome}
-					height="100px"
-					width="100px"
-					src={cloudLogo}
+					height="50px"
+					width="50px"
+					src={logoColor}
+					alt="app-logo"
 				/>
 			</div>
 			<div className="right-nav-container">
