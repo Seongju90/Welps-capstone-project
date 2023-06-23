@@ -90,6 +90,7 @@ export default function MyProfilePage () {
                     </div>
                 </div>
                 {/* conditional render either restaurant or reviews */}
+                {(!myRestaurantsArr.length && showMenu === "restaurants") && <div className="myprofile-no-restaurant-text">You have no restaurants yet create one!</div>}
                 {showMenu === 'restaurants' &&
                     <div
                         className="myprofile-restaurant-overall-container"
@@ -136,6 +137,7 @@ export default function MyProfilePage () {
                         ))}
                     </div>
                 }
+                {(!myReviewsArr.length && showMenu === "reviews") && <div className="myprofile-no-reviews-text">You have no reviews yet, go write one!</div>}
                 {showMenu === 'reviews' &&
                     <div
                         className="myprofile-restaurant-review-overall-container"

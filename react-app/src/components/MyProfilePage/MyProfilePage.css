@@ -146,3 +146,13 @@
 .myprofile-edit-delete-container {
     padding-bottom: 10px;
 }
+
+.myprofile-no-restaurant-text {
+    padding-top: 10px;
+    color: red;
+}
+
+.myprofile-no-reviews-text {
+    padding-top: 10px;
+    color: red;
+}

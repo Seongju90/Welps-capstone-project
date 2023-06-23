@@ -9,7 +9,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
 
-import cloudLogo from '../../icons/noun-cloud.svg'
+import cloudLogo from '../../icons/red-cloud-logo.svg'
 
 function Navigation(){
 	const sessionUser = useSelector(state => state.session.user);

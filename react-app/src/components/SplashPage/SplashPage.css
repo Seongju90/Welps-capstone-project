@@ -11,10 +11,28 @@
     object-fit: cover;
 }
 
-.splash-review-container {
+.splash-review-main-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 400px;
 }
 
-.splash-review-container {
+.splash-review-sub-container {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 6em 0 6em;
+}
+
+.splash-review-card-container {
     display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.splash-review-header {
+    font-size: 25px;
+    font-weight: bold;
 }
