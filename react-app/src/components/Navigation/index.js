@@ -17,6 +17,11 @@ function Navigation(){
 	const history = useHistory()
 	const location = useLocation()
 
+	// search state
+	const [searchQuery, setSearchQuery] = useState('')
+
+
+	// styling state
 	const [loginStyling, setLoginStyling] = useState('login-splash-button')
 	const [allRestaurantStyling, setAllRestaurantStyling] = useState('nav-list-all-restaurants')
 	const [createRestaurantStyling, setCreateRestaurantStyling] = useState('nav-create-restaurant-button')
@@ -59,6 +64,13 @@ function Navigation(){
 					width="50px"
 					src={logoColor}
 					alt="app-logo"
+				/>
+			</div>
+			<div>
+				<input
+					type="text"
+					placeholder="Search for restaurants..."
+					value={}
 				/>
 			</div>
 			<div className="right-nav-container">
