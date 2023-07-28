@@ -11,6 +11,7 @@ export default function RestaurantsIndex() {
     const restaurantsObj = useSelector(state => state?.restaurants)
     const restaurantsArray = Object.values(restaurantsObj)
 
+    const searchArray = useSelector(state => state?.search)
 
     useEffect(() => {
         dispatch(thunkAllRestaurants())
@@ -20,11 +21,17 @@ export default function RestaurantsIndex() {
     return (
         <div className="main-container">
             <div className="restaurant-main-container">
-                {restaurantsArray.map(restaurant => (
+                {searchArray ? searchArray?.map(restaurant => (
+                     <div className="restaurant-card-main-container" key={restaurant.id}>
+                        <RestaurantCard restaurant={restaurant}/>
+                    </div>
+                )) :
+                restaurantsArray?.map(restaurant => (
                     <div className="restaurant-card-main-container" key={restaurant.id}>
                         <RestaurantCard restaurant={restaurant}/>
                     </div>
-                ))}
+                ))
+                }
             </div>
             <div className="google-map-container">
                 <img className="index-map-img" src={map} alt={"restaurant-index-map"}/>

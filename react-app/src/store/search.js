@@ -1,5 +1,3 @@
-import { normalizeArray } from "./restaurants"
-
 /*---------------------- TYPE VARIABLES ----------------------*/
 const SEARCH_RESTAURANTS = "restaurants/SEARCH_RESTAURANTS"
 
@@ -40,7 +38,7 @@ const searchReducer = (state = initialState, action) => {
     let newState = {...state}
     switch(action.type) {
         case SEARCH_RESTAURANTS:
-            newState = normalizeArray(action.payload.Search)
+            newState = action.payload.Search
             return newState;
         default:
             return state;

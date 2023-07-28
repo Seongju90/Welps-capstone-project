@@ -23,6 +23,7 @@ function Navigation(){
 
 	const handleSearch = () => {
 		dispatch(thunkSearchRestaurants(searchQuery))
+		history.push(`/restaurants`)
 	}
 
 	// styling state
