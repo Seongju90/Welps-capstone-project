@@ -21,12 +21,12 @@ export default function RestaurantsIndex() {
     return (
         <div className="main-container">
             <div className="restaurant-main-container">
-                {searchArray ? searchArray?.map(restaurant => (
+                {!searchArray.length ? restaurantsArray?.map(restaurant => (
                      <div className="restaurant-card-main-container" key={restaurant.id}>
                         <RestaurantCard restaurant={restaurant}/>
                     </div>
                 )) :
-                restaurantsArray?.map(restaurant => (
+                searchArray?.map(restaurant => (
                     <div className="restaurant-card-main-container" key={restaurant.id}>
                         <RestaurantCard restaurant={restaurant}/>
                     </div>

@@ -71,8 +71,9 @@ function Navigation(){
 					alt="app-logo"
 				/>
 			</div>
-			<div>
+			<div className="search-bar-container">
 				<input
+					className="search-input"
 					type="text"
 					placeholder="Search for restaurants..."
 					value={searchQuery}

@@ -161,3 +161,14 @@
   font-weight: bold;
   padding-right: 10px;
 }
+
+
+/* Search Styling */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 13px 16px;
+}
