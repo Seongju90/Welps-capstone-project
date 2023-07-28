@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -7,19 +7,23 @@ import OpenModalButton from '../OpenModalButton';
 import RestaurantFormModal from '../RestaurantFormModal';
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-
+import { thunkSearchRestaurants } from "../../store/search";
 
 import redCloudLogo from '../../icons/red-cloud-logo.svg'
 import whiteCloudLogo from '../../icons/white-cloud-svg.svg'
 
 function Navigation(){
 	const sessionUser = useSelector(state => state.session.user);
+	const dispatch = useDispatch()
 	const history = useHistory()
 	const location = useLocation()
 
 	// search state
 	const [searchQuery, setSearchQuery] = useState('')
 
+	const handleSearch = () => {
+		dispatch(thunkSearchRestaurants(searchQuery))
+	}
 
 	// styling state
 	const [loginStyling, setLoginStyling] = useState('login-splash-button')
@@ -70,8 +74,10 @@ function Navigation(){
 				<input
 					type="text"
 					placeholder="Search for restaurants..."
-					value={}
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
 				/>
+				<button onClick={handleSearch}>Search</button>
 			</div>
 			<div className="right-nav-container">
 				<div className="create-main-container">
