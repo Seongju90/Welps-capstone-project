@@ -5,6 +5,7 @@ from thefuzz import fuzz
 from thefuzz import process
 from .restaurants_routes import round_to_nearest_half
 
+# fuzz uses Levenshtein distance string metric for measuring strings.
 
 search_routes = Blueprint('search', __name__)
 
@@ -24,6 +25,7 @@ def search_restaurants():
 
     # Peform fuzz search comparing search query to the restaurant names
     # Search data structure [('Chungdam', 77), ('Lock Chun', 57)] List of tuples, number = score
+    # token sort ratio calculates simliarity between strings irrelvant of order, matches each word and looks at overall content as whole.
     search_results = process.extract(query, restaurant_names, scorer=fuzz.token_sort_ratio, limit=5)
 
     # Loop through the search result and query for the restaurant data using the name and append to new list
