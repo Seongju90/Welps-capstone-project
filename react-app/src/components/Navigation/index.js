@@ -11,6 +11,7 @@ import { thunkSearchRestaurants } from "../../store/search";
 
 import redCloudLogo from '../../icons/red-cloud-logo.svg'
 import whiteCloudLogo from '../../icons/white-cloud-svg.svg'
+import searchIcon from '../../icons/search-alt.svg'
 
 function Navigation(){
 	const sessionUser = useSelector(state => state.session.user);
@@ -22,8 +23,13 @@ function Navigation(){
 	const [searchQuery, setSearchQuery] = useState('')
 
 	const handleSearch = () => {
-		dispatch(thunkSearchRestaurants(searchQuery))
-		history.push(`/restaurants`)
+		if (!searchQuery) {
+			history.push(`/restaurants`)
+		} else {
+			dispatch(thunkSearchRestaurants(searchQuery))
+			history.push(`/search/${searchQuery}`)
+		}
+
 	}
 
 	// styling state
@@ -32,6 +38,8 @@ function Navigation(){
 	const [createRestaurantStyling, setCreateRestaurantStyling] = useState('nav-create-restaurant-button')
 	const [logoColor, setLogoColor] = useState(whiteCloudLogo)
 	const [textColor, setTextColor] = useState('app-text-heading-splash')
+	const [searchInputStyle, setSearchInputStyle] = useState('search-input-splash')
+	const [searchIconStyle, setSearchIconStyle] = useState('search-icon-splash')
 
 	useEffect(() => {
 		if (location.pathname === '/') {
@@ -40,12 +48,16 @@ function Navigation(){
 			setCreateRestaurantStyling('nav-create-restaurant-button')
 			setLogoColor(whiteCloudLogo)
 			setTextColor('app-text-heading-splash')
+			setSearchInputStyle('search-input-splash')
+			setSearchIconStyle('search-icon-splash')
 		} else {
 			setLoginStyling('login-button-nonsplash')
 			setAllRestaurantStyling('nav-list-all-restaurants-nonsplash')
 			setCreateRestaurantStyling('nav-create-restaurant-button-nonsplash')
 			setLogoColor(redCloudLogo)
 			setTextColor('app-text-heading-nonsplash')
+			setSearchInputStyle('search-input')
+			setSearchIconStyle('search-icon-container')
 		}
 	},[setLoginStyling, setAllRestaurantStyling, setCreateRestaurantStyling, setLogoColor, setTextColor, location.pathname])
 
@@ -73,13 +85,22 @@ function Navigation(){
 			</div>
 			<div className="search-bar-container">
 				<input
-					className="search-input"
+					className={searchInputStyle}
 					type="text"
 					placeholder="Search for restaurants..."
 					value={searchQuery}
 					onChange={(e) => setSearchQuery(e.target.value)}
 				/>
-				<button onClick={handleSearch}>Search</button>
+				<div className={searchIconStyle}>
+					<img
+						className="search-icon"
+						src={searchIcon}
+						alt="search-icon-img"
+						width="20px"
+						height="20px"
+						onClick={handleSearch}
+					/>
+				</div>
 			</div>
 			<div className="right-nav-container">
 				<div className="create-main-container">
