@@ -89,8 +89,8 @@ export const thunkOneRestaurant = (id) => async (dispatch) => {
 export const thunkCreateRestaurant = (form) => async (dispatch) => {
     const response = await fetch(`/api/restaurants`, {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(form)
+        // no headers, or stringify for the body
+		body: form
     })
 
     if(response.ok) {

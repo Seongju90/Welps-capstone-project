@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Restaurant, Review, ReviewImage, RestaurantImage, Category, User, db
 from app.forms import RestaurantForm, EditRestaurantForm, ReviewForm
 from .auth_routes import validation_errors_to_error_messages
-
+from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, allowed_file
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -118,6 +118,20 @@ def create_restaurant():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        image = request.files["image"]
+
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
+
+        image.filename = get_unique_filename(image.filename)
+        # if upload is successfuly will return a key "url" and the value is the url
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
 
         newRestaurant = Restaurant(
             name=form.data["name"],
@@ -129,7 +143,7 @@ def create_restaurant():
             zipcode=form.data["zipcode"],
             price=form.data["price"],
             phone_number=form.data["phone_number"],
-            preview_image=form.data["preview_image"],
+            preview_image=upload["url"],
             start_hours=form.data["start_hours"],
             end_hours=form.data["end_hours"]
         )

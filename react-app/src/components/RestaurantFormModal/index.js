@@ -19,28 +19,29 @@ export default function RestaurantFormModal() {
     const [zipcode, setZipcode] = useState("")
     const [price, setPrice] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
-    const [previewImage, setPreviewImage] = useState("")
     const [startHours, setStartHours] = useState("")
     const [endHours, setEndHours] = useState("")
     const [errors, setErrors] = useState({})
 
+    const [image, setImage] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = {
-            'name': name,
-            'address': address,
-            'city': city,
-            'state': state,
-            'country': country,
-            'zipcode': zipcode,
-            'price': price,
-            'phone_number': phoneNumber,
-            'preview_image': previewImage,
-            'start_hours': startHours,
-            'end_hours': endHours
-        }
+        // creation of new form data, appended all attributes keys match backend
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("address", address);
+        formData.append("city", city);
+        formData.append("state", state);
+        formData.append("country", country);
+        formData.append("zipcode", zipcode);
+        formData.append("price", price);
+        formData.append("phone_number", phoneNumber);
+        formData.append("image", image);
+        formData.append("start_hours", startHours);
+        formData.append("end_hours", endHours);
+
 
         const newRestaurant = await dispatch(thunkCreateRestaurant(formData))
 
@@ -54,7 +55,7 @@ export default function RestaurantFormModal() {
 
     return (
         <div className="create-form-main-container">
-            <form className="create-restaurant-container" onSubmit={handleSubmit}>
+            <form className="create-restaurant-container" onSubmit={handleSubmit} encType="multipart/form-data">
                 <h2>Fill out your Restaurant Details</h2>
 
                 <div className="restaurant-form-name">
@@ -150,10 +151,9 @@ export default function RestaurantFormModal() {
                     <label>Preview Image Url:</label>
                     <input
                         className="input-preview"
-                        type="text"
-                        value={previewImage}
-                        onChange={(e) => setPreviewImage(e.target.value)}
-                        placeholder="Preview Image Url"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImage(e.target.files[0])}
                     />
                     {errors.preview_image && <div className="error">{errors.preview_image}</div>}
                 </div>
