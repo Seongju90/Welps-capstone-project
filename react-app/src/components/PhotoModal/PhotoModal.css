@@ -11,7 +11,7 @@
     grid-gap: 10px;
 }
 
-.photo-grid > img {
+.photo-grid > img[alt="restaurant-images"] {
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -25,4 +25,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.photo-delete-icon {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    bottom: 340px;
+    left: 320px;
+    border-radius: 4px;
 }
