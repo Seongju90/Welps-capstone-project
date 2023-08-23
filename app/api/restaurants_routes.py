@@ -292,12 +292,11 @@ def create_review(id):
 
 # Add an Image to a spot
 @restaurant_routes.route('/<int:id>/images', methods=['POST'])
+@login_required
 def add_image_to_restaurant(id):
     """
     Add an image to a restaurant by it's id
     """
-
-    print(' did it hit the backend &&&&&&&&&&&&&&&&&&&&')
     if "image" not in request.files:
         return {"errors": "image required"}, 400
 
@@ -328,7 +327,13 @@ def add_image_to_restaurant(id):
     db.session.add(restaurant_image)
     db.session.commit()
 
-    print('did it save and commit? ###################')
     # Query for restaurant
     restaurant = Restaurant.query.get(id)
-    return restaurant.to_dict()
+    restaurant_dict = restaurant.to_dict()
+
+    images = RestaurantImage.query.filter(RestaurantImage.restaurant_id == id).all()
+    images_dict = [image.to_dict() for image in images]
+
+    restaurant_dict['images'] = images_dict
+
+    return {"Single_Restaurant": restaurant_dict}

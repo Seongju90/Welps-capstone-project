@@ -6,6 +6,7 @@ const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
 const EDIT_RESTAURANTS = "restaurants/EDIT_RESTAURANTS"
 const DELETE_RESTAURANTS = "restaurants/DELETE_RESTAURANTS"
 const ADD_IMAGE = "restaurants/ADD_IMAGE"
+const DELETE_IMAGE = "restaurants/DELETE_IMAGE"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -220,7 +221,7 @@ const restaurantsReducer = (state = initialState, action) => {
             delete newState[action.payload]
             return newState;
         case ADD_IMAGE:
-            console.log('thunk', newState)
+            newState.singleRestaurant = action.payload.Single_Restaurant
             return newState
         default:
             return state;
