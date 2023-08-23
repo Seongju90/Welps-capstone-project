@@ -164,7 +164,7 @@ export default function SingleRestaurantPage () {
                     </div>
                     <div className="review-main-container">
                         {all_reviews_array?.map(review => (
-                            <ReviewCard review={review} />
+                            <ReviewCard review={review} key={review.id}/>
                         ))}
                     </div>
                     {/* <div className="review-main-container">

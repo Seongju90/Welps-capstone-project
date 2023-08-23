@@ -5,6 +5,7 @@ const CREATE_RESTAURANTS = "restaurants/CREATE_RESTAURANTS"
 const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
 const EDIT_RESTAURANTS = "restaurants/EDIT_RESTAURANTS"
 const DELETE_RESTAURANTS = "restaurants/DELETE_RESTAURANTS"
+const ADD_IMAGE = "restaurants/ADD_IMAGE"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -45,6 +46,13 @@ const actionEditRestaurants = (payload) => {
 const actionDeleteRestaurants = (payload) => {
     return {
         type: DELETE_RESTAURANTS,
+        payload
+    }
+}
+
+const actionAddImage = (payload) => {
+    return {
+        type: ADD_IMAGE,
         payload
     }
 }
@@ -166,6 +174,26 @@ export const thunkDeleteRestaurants = (id) => async (dispatch) => {
     else return { errors: ["An error occurred. Please try again."] }
 }
 
+export const thunkAddImage = (id, image) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${id}/images`, {
+        method: 'POST',
+        body: image
+    })
+
+    if(response.ok) {
+        const data = await response.json()
+        dispatch(actionAddImage(data))
+        return null
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
 /*---------------------- RESTAURANTS REDUCER ----------------------*/
 const initialState = {}
 const restaurantsReducer = (state = initialState, action) => {
@@ -191,6 +219,9 @@ const restaurantsReducer = (state = initialState, action) => {
         case DELETE_RESTAURANTS:
             delete newState[action.payload]
             return newState;
+        case ADD_IMAGE:
+            console.log('thunk', newState)
+            return newState
         default:
             return state;
     }

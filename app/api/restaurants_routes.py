@@ -289,3 +289,46 @@ def create_review(id):
         return new_review_dict
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+# Add an Image to a spot
+@restaurant_routes.route('/<int:id>/images', methods=['POST'])
+def add_image_to_restaurant(id):
+    """
+    Add an image to a restaurant by it's id
+    """
+
+    print(' did it hit the backend &&&&&&&&&&&&&&&&&&&&')
+    if "image" not in request.files:
+        return {"errors": "image required"}, 400
+
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    # if upload is successfuly will return a key "url" and the value is the url
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload['url']
+
+    restaurant_image = RestaurantImage(
+        restaurant_id = id,
+        url = url,
+        preview = False
+    )
+
+    db.session.add(restaurant_image)
+    db.session.commit()
+
+    print('did it save and commit? ###################')
+    # Query for restaurant
+    restaurant = Restaurant.query.get(id)
+    return restaurant.to_dict()

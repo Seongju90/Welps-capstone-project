@@ -20,7 +20,7 @@ export default function RestaurantsIndex() {
         dispatch(thunkAllRestaurants())
         // added this thunk so on hard refresh the query data persists
         dispatch(thunkSearchRestaurants(query))
-    }, [dispatch])
+    }, [dispatch, query])
 
 
     return (
