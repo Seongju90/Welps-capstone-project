@@ -10,7 +10,6 @@ from .api.auth_routes import auth_routes
 from .api.restaurants_routes import restaurant_routes
 from .api.reviews_routes import reviews_routes
 from .api.search_routes import search_routes
-from .api.restaurant_image_routes import restaurant_image_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -35,7 +34,6 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(restaurant_routes, url_prefix='/api/restaurants')
 app.register_blueprint(reviews_routes, url_prefix='/api/reviews')
 app.register_blueprint(search_routes, url_prefix='/api/search')
-app.register_blueprint(restaurant_image_routes, url_prefix="/api/restaurants-images")
 db.init_app(app)
 Migrate(app, db)
 

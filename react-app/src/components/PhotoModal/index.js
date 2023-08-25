@@ -2,12 +2,15 @@ import { useSelector, useDispatch } from "react-redux";
 import './PhotoModal.css'
 import OpenAddImageButton from "../OpenAddImageButton";
 import AddRestaurantImageForm from "../AddRestaurantImageForm";
+import { useModal } from "../../context/Modal";
+import { thunkRemoveImage } from "../../store/restaurants";
 
 import deleteIcon from '../../icons/delete.svg';
 
 
 function PhotoModal() {
     const dispatch = useDispatch()
+    const { closeModal } = useModal();
 
     const all_photos_array = useSelector(state => state?.restaurants?.singleRestaurant?.images)
     const restaurant = useSelector(state => state?.restaurants?.singleRestaurant)
@@ -17,8 +20,9 @@ function PhotoModal() {
 
 
     const deletePhoto = (imageId) => {
-        dispatch()
+        dispatch(thunkRemoveImage(imageId))
         window.alert(`Photo has been deleted from ${restaurant?.name}`)
+        closeModal()
     }
 
     return (
@@ -35,10 +39,11 @@ function PhotoModal() {
             </div>
             <div className="photo-grid">
                 {all_photos_array.map(image => (
-                    <div>
+                    <div className="image-delete-container">
                         <img
+                            className="photos-for-restaurant"
                             src={image.url}
-                            alt="restaurant-images"
+                            alt="restaurant-sub"
                             key={image.id}
                         />
                         {ownerId === userId &&
@@ -47,7 +52,7 @@ function PhotoModal() {
                                 src={deleteIcon}
                                 height={'16x'}
                                 width={'16px'}
-                                alt={'photo-delete'}
+                                alt='photo-delete'
                             />
                         }
                     </div>

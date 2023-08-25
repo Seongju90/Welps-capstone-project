@@ -3,17 +3,17 @@
     display: flex;
     flex-direction: column;
     margin: 1vw;
+    max-height: 80%
 }
 
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(100px, 1fr));;
     grid-gap: 10px;
 }
 
-.photo-grid > img[alt="restaurant-images"] {
+.photos-for-restaurant {
     position: relative;
-    width: 100%;
     overflow: hidden;
     height: auto;
     object-fit: cover;
@@ -31,7 +31,12 @@
     position: relative;
     z-index: 1;
     background-color: white;
-    bottom: 340px;
-    left: 320px;
     border-radius: 4px;
+    right: 30px;
+    top: 10px;
+}
+
+.image-delete-container {
+    display: flex;
+    position: relative;
 }

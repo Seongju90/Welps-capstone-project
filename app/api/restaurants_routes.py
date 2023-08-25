@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Restaurant, Review, ReviewImage, RestaurantImage, Category, User, db
 from app.forms import RestaurantForm, EditRestaurantForm, ReviewForm
 from .auth_routes import validation_errors_to_error_messages
-from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, allowed_file
+from ..api.aws_helpers import get_unique_filename, upload_file_to_s3, allowed_file, remove_file_from_s3
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -337,3 +337,27 @@ def add_image_to_restaurant(id):
     restaurant_dict['images'] = images_dict
 
     return {"Single_Restaurant": restaurant_dict}
+
+@restaurant_routes.route("/images/<int:id>", methods=["DELETE"])
+@login_required
+def delete_images(id):
+    """
+    Delete image from restaurant
+    """
+
+    image_to_delete = RestaurantImage.query.get(id)
+
+    # We need to use to_dict to extract the url from Python object, but instead of converting the whole object
+    # save it to a variable, because ....
+    url = image_to_delete.to_dict()['url']
+
+    # The extracted url is used for AWS.
+    remove_file_from_s3(url)
+
+    # When deleting from the DB, it will error if it is a to_dict object, it needs to be Python object when using delete.
+    db.session.delete(image_to_delete)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Successfully deleted the restaurant"
+    })
