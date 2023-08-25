@@ -1,0 +1,30 @@
+.add-image-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-label-input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.input-preview {
+    margin-left: 20px;
+    border: none;
+}
+
+.add-image-header {
+    margin: 1vw;
+}
+
+.add-image-submit-button {
+    border-radius: 4px;
+    background-color: red;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1vw;
+    height: 40px;
+}

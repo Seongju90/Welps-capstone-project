@@ -39,6 +39,9 @@ function App() {
             <SingleRestaurantPage/>
           </Route>
           {/* either place more detail route above, or use exact path for everything */}
+          <Route exact path="/search/:query">
+            <RestaurantsIndex/>
+          </Route>
           <Route exact path="/restaurants">
             <RestaurantsIndex/>
           </Route>

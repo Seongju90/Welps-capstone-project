@@ -1,0 +1,42 @@
+/* basic grid structure for photots */
+.photos-main-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1vw;
+    max-height: 80%
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));;
+    grid-gap: 10px;
+}
+
+.photos-for-restaurant {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.header-and-add-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.photo-delete-icon {
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    border-radius: 4px;
+    right: 30px;
+    top: 10px;
+}
+
+.image-delete-container {
+    display: flex;
+    position: relative;
+}

@@ -6,7 +6,9 @@ import { thunkOneRestaurant } from '../../store/restaurants';
 import { thunkAllReviews } from '../../store/reviews';
 import ReviewCard from '../ReviewCard'
 import ReviewFormModal from "../ReviewFormModal";
+import PhotoModal from '../PhotoModal';
 import OpenReviewModalButton from '../OpenReviewModalButton';
+import OpenPhotosModalButton from '../OpenPhotosModalButton';
 
 import phone from '../../icons/phone-call.svg'
 import directions from '../../icons/directions-svgrepo-com.svg'
@@ -41,7 +43,7 @@ export default function SingleRestaurantPage () {
     let imagesArr = restaurant?.images
 
     while (imagesArr?.length < 3) {
-        imagesArr.push({'url': restaurant.preview_image})
+        imagesArr.push({'url': restaurant?.preview_image})
     }
 
     if (imagesArr?.length >= 3) {
@@ -91,7 +93,14 @@ export default function SingleRestaurantPage () {
                             <div className="single-restaurant-hours">{restaurant?.start_hours}{" - "}{restaurant?.end_hours}</div>
                         </div>
                     </div>
-                    <div className="see-photo-button">See more photos</div>
+                    <div>
+                        <OpenPhotosModalButton
+                            buttonText="See more photos"
+                            modalComponent={<PhotoModal/>}
+                            buttonName="see-photo-button"
+                            restaurantName={restaurant?.name}
+                        />
+                    </div>
                 </div>
             </div>
             <div className="bottom-info-main-container">
@@ -155,7 +164,7 @@ export default function SingleRestaurantPage () {
                     </div>
                     <div className="review-main-container">
                         {all_reviews_array?.map(review => (
-                            <ReviewCard review={review} />
+                            <ReviewCard review={review} key={review.id}/>
                         ))}
                     </div>
                     {/* <div className="review-main-container">

@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, Regexp, URL
 from datetime import datetime
 from app.models import Restaurant
-
+from ..api.aws_helpers import ALLOWED_EXTENSIONS
 
 def phonenumber_exists(form, field):
     # Checking if the phone number exists
@@ -103,21 +104,22 @@ class RestaurantForm(FlaskForm):
             # ([0-9]{3}) matches three digits in one group ()
             # [-.●]? optional separator
         ])
-    preview_image = StringField(
-        "Preview Image",
-        validators = [
-            DataRequired("Preview Image is required"),
-            URL(require_tld=True, message="Invalid Url"),
-            # If true, then the domain-name portion of the URL must contain a .tld suffix.
-            # tld = top-level-domain => suffix that follows domain name in web address
-            Regexp(r'^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,}(?:\/[\w-]+)+(?:\.(?:jpe?g|gif|png))(?:\?.*)?$', message='Invalid image URL')
-            # https?:\/\/ => matches the start of URL with http:// or with https://
-            # (?:[a-z0-9\-]+\.)+ => Matches one or more domain name segments, separated by a dot. Each segment can contain lowercase letters or hyphens or numbers.
-            # [a-z]{2,} => matches the top-level domain, which consists of two or more lowercase letters
-            # (?:\/[\w-]+)+ => matches one or more path segments consisting of one or more word characters or hyphens separated by forward slashes.
-            # (?:\.(?:jpe?g|gif|png)) => matches a file extension
-            # (?:\?.*)? => matches optional query string at the end
-        ])
+    preview_image = FileField("Image File", validators=[FileAllowed(list(ALLOWED_EXTENSIONS))])
+    # preview_image = StringField(
+    #     "Preview Image",
+    #     validators = [
+    #         DataRequired("Preview Image is required"),
+    #         URL(require_tld=True, message="Invalid Url"),
+    #         # If true, then the domain-name portion of the URL must contain a .tld suffix.
+    #         # tld = top-level-domain => suffix that follows domain name in web address
+    #         Regexp(r'^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,}(?:\/[\w-]+)+(?:\.(?:jpe?g|gif|png))(?:\?.*)?$', message='Invalid image URL')
+    #         # https?:\/\/ => matches the start of URL with http:// or with https://
+    #         # (?:[a-z0-9\-]+\.)+ => Matches one or more domain name segments, separated by a dot. Each segment can contain lowercase letters or hyphens or numbers.
+    #         # [a-z]{2,} => matches the top-level domain, which consists of two or more lowercase letters
+    #         # (?:\/[\w-]+)+ => matches one or more path segments consisting of one or more word characters or hyphens separated by forward slashes.
+    #         # (?:\.(?:jpe?g|gif|png)) => matches a file extension
+    #         # (?:\?.*)? => matches optional query string at the end
+    #     ])
     start_hours = StringField(
         "Start Hours",
         validators = [

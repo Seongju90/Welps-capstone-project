@@ -5,6 +5,8 @@ const CREATE_RESTAURANTS = "restaurants/CREATE_RESTAURANTS"
 const MY_RESTAURANTS = 'restaurants/MY_RESTAURANTS'
 const EDIT_RESTAURANTS = "restaurants/EDIT_RESTAURANTS"
 const DELETE_RESTAURANTS = "restaurants/DELETE_RESTAURANTS"
+const ADD_IMAGE = "restaurants/ADD_IMAGE"
+const REMOVE_IMAGE = "restaurants/REMOVE_IMAGE"
 
 /*---------------------- ACTION CREATORS ----------------------*/
 const actionLoadAllRestaurants = (payload) => {
@@ -49,6 +51,20 @@ const actionDeleteRestaurants = (payload) => {
     }
 }
 
+const actionAddImage = (payload) => {
+    return {
+        type: ADD_IMAGE,
+        payload
+    }
+}
+
+const actionRemoveImage = (payload) => {
+    return {
+        type: REMOVE_IMAGE,
+        payload
+    }
+}
+
 /*---------------------- THUNK ACTION CREATORS ----------------------*/
 export const thunkAllRestaurants = () => async (dispatch) => {
     const response = await fetch(`/api/restaurants`)
@@ -89,8 +105,8 @@ export const thunkOneRestaurant = (id) => async (dispatch) => {
 export const thunkCreateRestaurant = (form) => async (dispatch) => {
     const response = await fetch(`/api/restaurants`, {
 		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(form)
+        // no headers, or stringify for the body
+		body: form
     })
 
     if(response.ok) {
@@ -166,6 +182,44 @@ export const thunkDeleteRestaurants = (id) => async (dispatch) => {
     else return { errors: ["An error occurred. Please try again."] }
 }
 
+export const thunkAddImage = (id, image) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/${id}/images`, {
+        method: 'POST',
+        body: image
+    })
+
+    if(response.ok) {
+        const data = await response.json()
+        dispatch(actionAddImage(data))
+        return null
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
+export const thunkRemoveImage = (imageId) => async (dispatch) => {
+    const response = await fetch(`/api/restaurants/images/${imageId}`, {
+        method: 'DELETE',
+    })
+
+    if (response.ok) {
+        dispatch(actionRemoveImage(imageId))
+        return null
+    }
+
+    else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) return data;
+    }
+
+    else return { errors: ["An error occurred. Please try again."] }
+}
+
 /*---------------------- RESTAURANTS REDUCER ----------------------*/
 const initialState = {}
 const restaurantsReducer = (state = initialState, action) => {
@@ -190,6 +244,18 @@ const restaurantsReducer = (state = initialState, action) => {
             return newState;
         case DELETE_RESTAURANTS:
             delete newState[action.payload]
+            return newState;
+        case ADD_IMAGE:
+            newState.singleRestaurant = action.payload.Single_Restaurant
+            return newState
+        case REMOVE_IMAGE:
+            const imagesArray = newState.singleRestaurant.images
+            for (let i = 0; i < imagesArray.length; i++) {
+                const img = imagesArray[i]
+                if (img.id === action.payload) {
+                    imagesArray.splice(i,1)
+                }
+            }
             return newState;
         default:
             return state;
