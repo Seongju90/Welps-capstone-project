@@ -41,12 +41,12 @@ function SplashPage() {
             <footer className="footer-main-container">
                 <div className="footer-about-container">
                     <div className="footer-about-text">About</div>
-                    <a className="footer-about-link-text" href="https://github.com/Seongju90/Welps-capstone-project">About Welp</a>
+                    <a className="footer-about-link-text" href="https://github.com/Seongju90/Welps-capstone-project" target="_blank">About Welp</a>
                 </div>
                 <div className="footer-developer-container">
                     <div className="developer-text">Developer</div>
                     <div className="developer-info-sub-container">
-                        <a className="github-icon" href="https://github.com/Seongju90">
+                        <a className="github-icon" href="https://github.com/Seongju90" target="_blank">
                             <img
                                 src={githubIcon}
                                 alt="github-icon"
@@ -54,7 +54,8 @@ function SplashPage() {
                                 height="14px"
                             />
                         </a>
-                        <a classname="linkedin-icon" href="https://www.linkedin.com/in/lee-philip-31902124a/">
+                        {/* target="_blank" target attribute on a element, tells browser to open in new tab */}
+                        <a classname="linkedin-icon" href="https://www.linkedin.com/in/lee-philip-31902124a/" target="_blank">
                             <img
                                 src={linkedInIcon}
                                 alt="linkedin-icon"
