@@ -52,7 +52,7 @@ function PhotoModal() {
                                 src={deleteIcon}
                                 height={'16x'}
                                 width={'16px'}
-                                alt='photo-delete'
+                                alt='icon-delete'
                             />
                         }
                     </div>
