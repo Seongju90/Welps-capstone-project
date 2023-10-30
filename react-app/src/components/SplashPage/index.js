@@ -56,7 +56,7 @@ function SplashPage() {
                         </a>
                         {/* target="_blank" target attribute on a element, tells browser to open in new tab */}
                         {/* rel="noreferrer" instructs browser to not send HTTP header when opening new page, "security reasons" */}
-                        <a classname="linkedin-icon" href="https://www.linkedin.com/in/lee-philip-31902124a/" target="_blank" rel="noreferrer">
+                        <a className="linkedin-icon" href="https://www.linkedin.com/in/lee-philip-31902124a/" target="_blank" rel="noreferrer">
                             <img
                                 src={linkedInIcon}
                                 alt="linkedin-icon"

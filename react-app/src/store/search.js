@@ -39,6 +39,7 @@ const searchReducer = (state = initialState, action) => {
     switch(action.type) {
         case SEARCH_RESTAURANTS:
             newState = action.payload.Search
+            newState.push(action.payload.Results)
             return newState;
         default:
             return state;

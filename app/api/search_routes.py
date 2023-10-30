@@ -12,9 +12,9 @@ search_routes = Blueprint('search', __name__)
 
 @search_routes.route("")
 def search_restaurants():
-
     # Get query from request
     query = request.args.get('query')
+    print('queryeryeyreyrye', query)
 
     # Query for all the restaurants then convert it to dictionary
     restaurants = Restaurant.query.all()
@@ -27,6 +27,16 @@ def search_restaurants():
     # Search data structure [('Chungdam', 77), ('Lock Chun', 57)] List of tuples, number = score
     # token sort ratio calculates simliarity between strings irrelvant of order, matches each word and looks at overall content as whole.
     search_results = process.extract(query, restaurant_names, scorer=fuzz.token_sort_ratio, limit=5)
+
+    # Threshold score=40 seems to be where results are randomized and not pertaining to the search keyword at all
+    # Set results found variable to default true, if all of the search results are under 40 set variable to false
+    results_found = False
+
+    # Loop through the result scores to see if their threshold is above 40
+    for results in search_results:
+        score = results[1]
+        if score > 40:
+            results_found = True
 
     # Loop through the search result and query for the restaurant data using the name and append to new list
     search_restaurant_list = []
@@ -71,4 +81,4 @@ def search_restaurants():
         search_restaurant['images'] = images_dict
         search_restaurant['categories'] = categories_dict
 
-    return {"Search": search_restaurants_dict}
+    return {"Search": search_restaurants_dict, "Results": results_found}
