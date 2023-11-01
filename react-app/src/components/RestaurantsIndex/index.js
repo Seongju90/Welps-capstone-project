@@ -18,8 +18,8 @@ export default function RestaurantsIndex() {
 
     // Variable to hold true or false depending on if the search results went over the threshold in backend,
     // since the result is "pushed" at the end we extract from the end without modifying it.
-    const searchResult = searchArray[searchArray.length - 1]
-    console.log("frontend search result", searchResult)
+    const searchResult = searchArray[searchArray?.length - 1]
+
 
     useEffect(() => {
         dispatch(thunkAllRestaurants())

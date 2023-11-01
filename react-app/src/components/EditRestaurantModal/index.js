@@ -44,7 +44,6 @@ export default function EditRestaurantModal({restaurant}) {
         const data = await dispatch(thunkEditRestaurants(restaurant.id, restaurantData))
 
         if(data) {
-            console.log(data)
             setErrors(data.errors)
         } else {
             // if data is created properly, it returns null which close Modal.
