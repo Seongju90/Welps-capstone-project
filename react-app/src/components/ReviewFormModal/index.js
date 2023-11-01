@@ -32,7 +32,6 @@ export default function ReviewFormModal () {
         } else {
             closeModal()
         }
-        console.log(errors)
     }
 
 
