@@ -13,3 +13,24 @@
 .index-map-img {
     width: max-content;
 }
+
+.no-result-found-container {
+    min-width: 530px;
+    border-top: 1px solid lightgrey;
+    padding: 20px;
+}
+
+.no-results-header {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.suggestions-no-result {
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.list-of-no-result-text > li {
+    font-size: 14px;
+}
