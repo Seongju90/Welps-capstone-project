@@ -3,7 +3,7 @@
 .restaurant-card-container {
     display: flex;
     flex-direction: row;
-    padding: 2vw;
+    padding: 20px;
     border-top: 1px solid lightgrey;
     min-width: 530px;
 }
