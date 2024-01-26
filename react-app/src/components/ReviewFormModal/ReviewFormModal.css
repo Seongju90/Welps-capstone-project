@@ -19,11 +19,15 @@
 .review-input-form {
     width: 90%;
     height: 200px;
-    text-align: top;
 }
 
 .review-rating-input-form {
     width: 90%;
+}
+
+.review-input-form::placeholder {
+    text-align: center;
+    padding-top: 80px;
 }
 
 /* Review button */
