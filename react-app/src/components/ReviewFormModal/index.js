@@ -41,13 +41,13 @@ export default function ReviewFormModal () {
                 <h1>Write a Review</h1>
                 <div className="review-form-input-container">
                     <label>
-                        <input
+                        <textarea
                             className="review-input-form"
                             type="text"
                             value={review}
                             onChange={(e) => setReview(e.target.value)}
-                            placeholder='Write your review!'
-                        />
+                            placeholder='Write your review!'></textarea>
+
                     </label>
                     {errors.review && <div className="errors">{errors.review}</div>}
                 </div>
