@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     width: 600px;
-    height: 600px;
+    margin-bottom: 20px;
 }
 
 .review-form-container {
@@ -18,7 +18,8 @@
 /* Input for reviews */
 .review-input-form {
     width: 90%;
-    height: 350px;
+    height: 200px;
+    text-align: top;
 }
 
 .review-rating-input-form {
