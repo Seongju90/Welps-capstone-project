@@ -5,13 +5,15 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-
+import dotenv from 'dotenv';
 
 import MyProfilePage from "./components/MyProfilePage";
 import RestaurantsIndex from "./components/RestaurantsIndex";
 import SplashPage from "./components/SplashPage";
 import SingleRestaurantPage from "./components/SingleRestaurantPage";
 
+// Load environment variables from .env file
+dotenv.config();
 
 function App() {
   const dispatch = useDispatch();
