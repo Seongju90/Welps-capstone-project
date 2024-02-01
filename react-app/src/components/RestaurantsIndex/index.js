@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { thunkAllRestaurants } from '../../store/restaurants';
 import RestaurantCard from '../RestaurantCard';
+import Map from '../GoogleMap';
 import './RestaurantIndex.css';
+
 
 import map from '../../icons/google-map.png'
 import { thunkSearchRestaurants } from '../../store/search';
@@ -57,6 +59,7 @@ export default function RestaurantsIndex() {
             </div>
             <div className="google-map-container">
                 <img className="index-map-img" src={map} alt={"restaurant-index-map"}/>
+                <Map/>
             </div>
         </div>
     )
