@@ -5,15 +5,17 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import dotenv from 'dotenv';
+
 
 import MyProfilePage from "./components/MyProfilePage";
 import RestaurantsIndex from "./components/RestaurantsIndex";
 import SplashPage from "./components/SplashPage";
 import SingleRestaurantPage from "./components/SingleRestaurantPage";
 
-// Load environment variables from .env file
-dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config()
+
+console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function App() {
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
 
   return (
     <>

@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "dotenv": "^16.4.1"
+    "@react-google-maps/api": "^2.19.2"
   }
 }
